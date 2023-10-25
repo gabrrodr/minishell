@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 14:59:44 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/04/20 14:53:46 by gabrrodr         ###   ########.fr       */
+/*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
+/*   Updated: 2023/10/25 13:52:53 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	**dupe_arr(t_prompt *prompt)
 {
-	size_t	i;
+	
+}
 
-	i = 0;
-	while (i < n)
-	{
-		((char *)s)[i] = c;
-		i++;
-	}
-	return (s);
+void	exit_env(t_prompt *prompt)
+{
+	printf("exit\n");
+	free_data(prompt);
 }
