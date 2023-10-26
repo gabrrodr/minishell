@@ -6,42 +6,52 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:42:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/10/24 16:19:18 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:54:38 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
+int	ft_is_quote(char c)
 {
-	t_lexer *node;
-	static int	i;
-
-	i = 0;
-	node = (t_lexer *)malloc(sizeof(t_lexer));
-	if (!node)
-		return (NULL);
-	node->str = str;
-	node->token = tokenType;
-	node->i = i++;
-	node->next = NULL;
-	node->prev = NULL;
+	if (c == '\'' || c == '"')
+		return (1);
+	return (0);
 }
 
-void	ft_lexeradd_back(t_lexer **lst, t_lexer *node)
+int	ft_is_separator(char *c)
 {
-	t_lexer	*tmp;
-	
-	tmp = *lst;
-	if (!node)
-		return ;
-	if (!*lst)
+	if (*c == ' ' || *c == '\t' || *c == '|' 
+		|| *c == '>' || *c == '<')
+		return (1);
+	return (0);
+}
+
+void	ft_skip_spaces(char **line)
+{
+	while (**line && ft_isspace(**line))
+		(*line)++;
+}
+
+bool	ft_skip_quotes(char *line, size_t *i)
+{
+	char	quote;
+
+	quote = line[*i];
+	if (ft_strchr(line + *i + 1, quote))
 	{
-		*lst = node;
-		return ;
+		(*i)++;
+		while (line[*i] != quote)
+			(*i)++;
+		(*i)++;
+		return (true);
 	}
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = node;
-	node->prev = tmp; 
+	return (false);
+}
+
+void	ft_print_q_err(char	c)
+{
+	ft_putstr_fd("minishell: unexpected EOF while looking for matching `", 2);
+	ft_putchar_fd(c, 2);
+	/*ft_putstr_fd("'\n", 2);*/
 }
