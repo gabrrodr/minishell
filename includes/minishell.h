@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/25 17:58:00 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:26:38 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 
 typedef enum	s_tokens
 {
-	PIPE,
+	PIPE = 1,
 	GREAT,
-	DOUBLE_GREAT,
+	GREAT_GREAT,
 	LESS,
-	DOUBLE_LESS,
+	LESS_LESS,
 }				t_tokens;
 
 typedef struct s_lexer
@@ -60,11 +60,17 @@ typedef struct s_prompt
 	char			**env;
 }				t_prompt;
 
+//init
 t_prompt	*init_prompt(char **argv, char **env);
+
 void	exit_env(t_prompt *prompt);
 void	dupe_arr(t_prompt *prompt, char **arr);
+
+//frees
 void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
+
+//lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 
