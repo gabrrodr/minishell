@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 13:09:20 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/10/25 13:51:27 by mcarneir         ###   ########.fr       */
+/*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
+/*   Updated: 2023/10/26 11:26:38 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "../libs/libft/libft.h"
+
+# include "../libs/libft/libft.h"
 # include <stdlib.h>
 # include <string.h>
 # include <readline/readline.h>
@@ -24,10 +25,19 @@
 # include <sys/ioctl.h>
 # include <fcntl.h>
 
+typedef enum s_tokens
+{
+	PIPE = 1,
+	GREAT,
+	GREAT_GREAT,
+	LESS,
+	LESS_LESS,
+}				t_tokens;
+
 typedef struct s_lexer
 {
 	char    		*str;
-	t_tokens		token;
+	int				token;
 	int				i;
 	struct s_lexer	*next;
 	struct s_lexer	*prev;
@@ -51,26 +61,17 @@ typedef struct s_prompt
 	char			**env;
 }				t_prompt;
 
-typedef enum s_tokens
-{
-	PIPE = 1,
-	GREAT,
-	GREAT_GREAT,
-	LESS,
-	LESS_LESS,
-}	t_tokens;
+//init
+t_prompt	*init_prompt(char **argv, char **env);
 
-typedef struct s_lexer
-{
-	char			*str;
-	t_tokens		token;
-	int				i;
-	struct s_lexer	*next;
-	struct s_lexer	*prev;
-}	t_lexer;
+void	exit_env(t_prompt *prompt);
+void	dupe_arr(t_prompt *prompt, char **arr);
 
-//Lexer//
+//frees
+void	free_array(char **arr);
+void	free_data(t_prompt *prompt);
 
+//lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 

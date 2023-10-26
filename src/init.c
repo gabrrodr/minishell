@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/25 13:52:57 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:54:02 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_simple_cmds	*init_simple_cmds(void)
 
 t_prompt	*init_prompt(char **argv, char **env)
 {
+	(void)argv;
 	t_prompt	*prompt;
 	
 	prompt = malloc(sizeof(t_prompt));
@@ -36,6 +37,6 @@ t_prompt	*init_prompt(char **argv, char **env)
 		return (NULL);
 	prompt->lexer = NULL;
 	prompt->simple_cmds = init_simple_cmds();
-	prompt->env = NULL;
+	dupe_arr(prompt, env);
 	return (prompt);
 }

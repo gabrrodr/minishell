@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/25 13:52:49 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:59:39 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int	main(int argc, char **argv, char **env)
 	while (prompt)
 	{
 		input = readline("minishell$ ");
-		if (input == NULL)
+		if (input == NULL || !ft_strcmp(input, "exit"))
 		{
 			free(input);
 			exit_env(prompt);
 		}
 		add_history(input);
 	}
+	exit_env(prompt);
 }
