@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+
 # include "../libs/libft/libft.h"
 # include <stdlib.h>
 # include <string.h>
@@ -24,7 +25,7 @@
 # include <sys/ioctl.h>
 # include <fcntl.h>
 
-typedef enum	s_tokens
+typedef enum s_tokens
 {
 	PIPE = 1,
 	GREAT,
