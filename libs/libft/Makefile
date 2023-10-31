@@ -6,7 +6,7 @@
 #    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 16:00:32 by mcarneir          #+#    #+#              #
-#    Updated: 2023/08/18 15:47:29 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/10/26 15:04:10 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =   ft_atoi.c \
         ft_isalpha.c \
         ft_isascii.c \
         ft_isprint.c \
+		ft_isspace.c \
 		ft_isdigit.c \
         ft_itoa.c \
         ft_memchr.c \

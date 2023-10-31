@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/26 11:26:38 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:10:19 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 
 typedef enum s_tokens
 {
-	PIPE = 1,
+	IDENTIFIER,
+	PIPE,
 	GREAT,
 	GREAT_GREAT,
 	LESS,
@@ -37,7 +38,7 @@ typedef enum s_tokens
 typedef struct s_lexer
 {
 	char    		*str;
-	int				token;
+	t_tokens		token;
 	int				i;
 	struct s_lexer	*next;
 	struct s_lexer	*prev;
@@ -74,6 +75,16 @@ void	free_data(t_prompt *prompt);
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
+void	ft_clear_lexer(t_lexer **lexer);
+void	ft_skip_spaces(char **line);
+int		ft_is_quote(char c);
+int		ft_is_separator(char *c);
+bool	ft_skip_quotes(char *line, size_t *i);
+void	ft_print_q_err(char	c);
+int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok);
+int	ft_append_identifier(char **str, t_lexer **lexer_tok);
+t_lexer	*lexer(char *input);
+
 
 
 

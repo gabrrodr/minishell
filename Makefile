@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/10/25 17:44:30 by gabrrodr         ###   ########.fr        #
+#    Updated: 2023/10/26 15:01:53 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,13 @@ NAME = minishell
 SRC = 	src/main.c \
 		src/init.c \
 		src/frees.c \
-		src/utils.c
+		src/utils.c \
+		src/lexer.c \
+		src/lexer_utils.c \
+		src/lexer_lst.c \
+		src/lexer_append.c \
+		
+		
 
 OBJ_SRC = $(SRC:.c=.o)
 
