@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 12:03:41 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:10:01 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 
 //lexer
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 void	ft_clear_lexer(t_lexer **lexer);
 void	ft_skip_spaces(char **line);
@@ -83,6 +83,7 @@ void	ft_print_q_err(char	c);
 int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok);
 int	ft_append_identifier(char **str, t_lexer **lexer_tok);
 t_lexer	*lexer(char *input);
+t_lexer	*ms_lstlast(t_lexer *lst);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/31 15:03:08 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:13:17 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 void	redirections(t_prompt *prompt, t_simple_cmds *cmds)
 {
-	if (is_redirection(prompt->lexer->token))
+	t_lexer	*tmp;
+
+	if (prompt->lexer && is_redirection(prompt->lexer->token))
 	{
 		cmds->num_redirections++;
 		if (!cmds->redirect)
-			cmds->redirect = prompt->lexer;
+			cmds->redirect = ft_lexernew(prompt->lexer->token, NULL, 't');
 		else
+			ft_lexeradd_back(cmds->redirect, ft_lexernew(prompt->lexer->token, NULL, 't'));
+		prompt->lexer = prompt->lexer->next;
+		if (prompt->lexer && prompt->lexer->str)
 		{
-			cmds->redirect->next = prompt->lexer;
-			prompt->lexer->prev = cmds->redirect;
-			cmds->redirect = cmds->redirect->next;
+			tmp = ms_lstlast(cmds->redirect);
+			tmp->next = ft_strdup(prompt->lexer->str);
+			prompt->lexer = prompt->lexer->next;
 		}
 	}
-	
 }
 
 void	get_simple_cmds(t_prompt *prompt, int pipes)
