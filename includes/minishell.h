@@ -74,7 +74,7 @@ void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 
 //lexer
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 void	ft_clear_lexer(t_lexer **lexer);
 void	ft_skip_spaces(char **line);
@@ -85,6 +85,7 @@ void	ft_print_q_err(char	c);
 int		ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok);
 int		ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i);
 t_lexer	*lexer(char *input);
+t_lexer	*ms_lstlast(t_lexer *lst);
 
 //parser
 void	parser(t_prompt *prompt);

@@ -12,15 +12,39 @@
 
 #include "../includes/minishell.h"
 
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
+t_lexer	*ms_lstlast(t_lexer *lst)
+{
+	while (lst)
+	{
+		if (!lst->next)
+			return (lst);
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type)
 {
 	t_lexer *node;
 
 	node = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!node)
 		return (NULL);
-	node->str = str;
-	node->token = tokenType;
+	if (type == 't')
+	{
+		node->str = NULL;
+		node->token = ft_strdup(str);
+	}
+	else if (type == 'w')
+	{
+		node->str = ft_strdup(str);
+		node->token = NULL;
+	}
+	else
+	{
+		node->str = str;
+		node->token = tokenType;
+	}
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
