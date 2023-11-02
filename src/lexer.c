@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:52:05 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/10/31 11:23:57 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:23:13 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_lexer	*ft_handle_tokenize(char *str)
 				|| !ft_strncmp(str, "|", 1))
 				error = (!ft_handle_separator(&str, &lexer_tok) && 1);
 		else 
-				error = (!ft_append_identifier(&str, &lexer_tok) && 1);
+				error = (!ft_append_identifier(&str, &lexer_tok, 0) && 1);
 	}
 	return(lexer_tok);
 }

@@ -6,7 +6,7 @@
 #    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/10/26 15:01:53 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/11/02 17:26:38 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = 	src/main.c \
 		src/lexer_utils.c \
 		src/lexer_lst.c \
 		src/lexer_append.c \
-		
+		src/parser.c \
+		src/parser_utils.c
 		
 
 OBJ_SRC = $(SRC:.c=.o)
