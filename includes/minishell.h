@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 12:03:41 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:26:08 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ typedef struct s_prompt
 	t_simple_cmds	*simple_cmds;
 	t_lexer			*lexer;
 	char			**env;
+	int				flag;
 }				t_prompt;
 
 //init
 t_prompt	*init_prompt(char **argv, char **env);
+t_simple_cmds	*init_simple_cmds(void);
 
 void	exit_env(t_prompt *prompt);
 void	dupe_arr(t_prompt *prompt, char **arr);
@@ -80,11 +82,15 @@ int		ft_is_quote(char c);
 int		ft_is_separator(char *c);
 bool	ft_skip_quotes(char *line, size_t *i);
 void	ft_print_q_err(char	c);
-int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok);
-int	ft_append_identifier(char **str, t_lexer **lexer_tok);
+int		ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok);
+int		ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i);
 t_lexer	*lexer(char *input);
 
-
+//parser
+void	parser(t_prompt *prompt);
+int		is_redirection(char **str);
+int		is_builtin(char *str);
+int	nbr_nodes(t_lexer *lexer);
 
 
 #endif

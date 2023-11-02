@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_append.c                                         :+:      :+:    :+:   */
+/*   lexer_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:55:45 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/31 11:21:27 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:23:36 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	remove_quotes(char *str)
 int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok)
 {
 	t_lexer	*tok;
-	
+
 	tok = ft_lexernew(NULL, token);
 	if (!tok)
 		return (0);
@@ -50,15 +50,13 @@ int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok)
 	return (1);
 }
 
-int	ft_append_identifier(char **str, t_lexer **lexer_tok)
+int	ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i)
 {
 	char	*tmp;
 	char	*value;
 	t_lexer	*tok;
-	size_t	i;
 
 	tmp = *str;
-	i = 0;
 	while (tmp[i] && !ft_is_separator(tmp + i))
 	{
 		if (ft_is_quote(tmp[i]))
