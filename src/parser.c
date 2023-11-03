@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 18:36:57 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:34:17 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 	
 	size = nbr_nodes(prompt->lexer);
 	if (!cmds->str)
-	{
-		cmds->str = malloc(sizeof(char *) * (size + 1));
-		if (!cmds->str)
-			return ;
-		cmds->str[size] = NULL;
-	}
+		alloc_double_array(size, cmds);
 	while (prompt->lexer)
 	{
 		if (is_redirection(prompt->lexer->token))
@@ -60,6 +55,8 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 				prompt->flag++;
 			}	
 		}
+		if (prompt->lexer && prompt->lexer->token == PIPE)
+			return ;
 		prompt->lexer = prompt->lexer->next;
 	}
 }
@@ -77,17 +74,17 @@ void	get_simple_cmds(t_prompt *prompt, int pipes)
 		if (prompt->lexer->token && prompt->lexer->token == PIPE)
 		{		
 			
-			lexer_tmp = prompt->lexer->next;
+			prompt->lexer = prompt->lexer->next;
 			pipes--;
 			prompt->flag = 0;
 			cmds_tmp = init_simple_cmds();
-			if (!cmds_tmp)
-				return ;
 			cmds->next = cmds_tmp;
 			cmds_tmp->prev = cmds;
 			cmds = cmds->next;
 		}
 		redirections(prompt, cmds);
+		if (prompt->lexer && prompt->lexer->token == PIPE)
+			continue ;
 		process_tokens(prompt, cmds);
 	}
 	prompt->lexer = lexer_tmp;

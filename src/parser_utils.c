@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:47:16 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 17:47:18 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:29:31 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ int	nbr_nodes(t_lexer *lexer)
 		}
 	}
 	return (i);
+}
+
+void	alloc_double_array(int size, t_simple_cmds *cmds)
+{
+	cmds->str = malloc(sizeof(char *) * (size + 1));
+	if (!cmds->str)
+		return ;
+	cmds->str[size] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 17:47:42 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:30:00 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	parser(t_prompt *prompt);
 int	is_redirection(t_tokens tokenType);
 int		is_builtin(char *str);
 int	nbr_nodes(t_lexer *lexer);
+void	alloc_double_array(int size, t_simple_cmds *cmds);
 
 
 

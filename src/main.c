@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 18:06:19 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:25:25 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 	prompt = init_prompt(argv, env);
 	while (prompt)
 	{
-		input = readline("\033[95mminishell$ \033[0m");
+		input = readline("\001\e[1;35m\002minishell$ \001\e[0m\002");
 		if (input == NULL || !ft_strcmp(input, "exit"))
 		{
 			free(input);
