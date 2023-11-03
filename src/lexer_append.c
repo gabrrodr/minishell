@@ -39,7 +39,7 @@ void	remove_quotes(char *str)
 int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok)
 {
 	t_lexer	*tok;
-	
+
 	tok = ft_lexernew(NULL, token);
 	if (!tok)
 		return (0);
@@ -71,7 +71,7 @@ int	ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i)
 	if (!value)
 		return (0);
 	remove_quotes(value);
-	tok = ft_lexernew(value, IDENTIFIER);
+	tok = ft_lexernew(value, IDENTIFIER, NULL);
 	if (!tok)
 		return (free(value), 0);
 	*str += i;

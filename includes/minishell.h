@@ -74,7 +74,7 @@ void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 
 //lexer
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 void	ft_clear_lexer(t_lexer **lexer);
 void	ft_skip_spaces(char **line);

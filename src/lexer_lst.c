@@ -30,8 +30,21 @@ t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
 	node = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!node)
 		return (NULL);
-	node->str = str;
-	node->token = tokenType;
+	if (type == 't')
+	{
+		node->str = NULL;
+		node->token = ft_strdup(str);
+	}
+	else if (type == 'w')
+	{
+		node->str = ft_strdup(str);
+		node->token = NULL;
+	}
+	else
+	{
+		node->str = str;
+		node->token = tokenType;
+	}
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
