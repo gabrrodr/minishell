@@ -6,11 +6,22 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:42:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/02 17:19:38 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:42:20 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+t_lexer	*ms_lstlast(t_lexer *lst)
+{
+	while (lst)
+	{
+		if (!lst->next)
+			return (lst);
+		lst = lst->next;
+	}
+	return (lst);
+}
 
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
 {

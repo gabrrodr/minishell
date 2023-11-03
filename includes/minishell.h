@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 17:26:08 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:47:42 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,14 @@ void	ft_print_q_err(char	c);
 int		ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok);
 int		ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i);
 t_lexer	*lexer(char *input);
+t_lexer	*ms_lstlast(t_lexer *lst);
 
 //parser
 void	parser(t_prompt *prompt);
-int		is_redirection(char **str);
+int	is_redirection(t_tokens tokenType);
 int		is_builtin(char *str);
 int	nbr_nodes(t_lexer *lexer);
+
 
 
 #endif
