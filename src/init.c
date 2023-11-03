@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 16:47:58 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:16:26 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_simple_cmds	*init_simple_cmds(void)
 	cmds->num_redirections = 0;
 	cmds->hd_file_name = NULL;
 	cmds->redirect = NULL;
+	cmds->next = NULL;
+	cmds->prev = NULL;
 	return (cmds);
 }
 

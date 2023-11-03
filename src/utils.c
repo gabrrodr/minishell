@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/10/31 13:02:31 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:53:45 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	exit_env(t_prompt *prompt)
 {
 	printf("exit\n");
 	free_data(prompt);
+	exit(0);
 }
