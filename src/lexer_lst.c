@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:42:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/02 17:19:38 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:42:20 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_lexer	*ms_lstlast(t_lexer *lst)
 	return (lst);
 }
 
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type)
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
 {
 	t_lexer *node;
 

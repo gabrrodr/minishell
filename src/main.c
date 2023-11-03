@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 17:26:51 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:06:19 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	dev_mod1(t_prompt *prompt)
 	for (t_lexer *node = prompt->lexer; node; node = node->next)
 	{
 		if (!node->str)
-			printf("[%s] ", node->token);
+			printf("[%u] ", node->token);
 		else
 			printf("[%s] ", node->str);
 	}
@@ -42,13 +42,13 @@ static void	dev_mod2(t_prompt *prompt)
 		while (cmds->str && cmds->str[++i])
 			printf("[%s] ", cmds->str[i]);
 		printf("\n  \033[0;34mBUILTIN:\033[0m %s\n", cmds->builtin);
-		printf("  \033[0;34mREDIRCT NUMBER:\033[0m %d\n", cmds->num_redirct);
+		printf("  \033[0;34mREDIRCT NUMBER:\033[0m %d\n", cmds->num_redirections);
 		printf("  \033[0;34mREDIRCT:\033[0m ");
-		node = cmds->redirct;
+		node = cmds->redirect;
 		while (node)
 		{
 			if (node->token)
-				printf("[%s]", node->token);
+				printf("[%u]", node->token);
 			if (node->str)
 				printf("[%s]", node->str);
 			printf("  ");

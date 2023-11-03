@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 17:18:56 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:36:57 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	redirections(t_prompt *prompt, t_simple_cmds *cmds)
 	{
 		cmds->num_redirections++;
 		if (!cmds->redirect)
-			cmds->redirect = ft_lexernew(prompt->lexer->token, NULL, 't');
+			cmds->redirect = ft_lexernew(NULL, prompt->lexer->token);
 		else
-			ft_lexeradd_back(cmds->redirect, ft_lexernew(prompt->lexer->token, NULL, 't'));
+			ft_lexeradd_back(&cmds->redirect, ft_lexernew(NULL, prompt->lexer->token));
 		prompt->lexer = prompt->lexer->next;
 		if (prompt->lexer && prompt->lexer->str)
 		{
 			tmp = ms_lstlast(cmds->redirect);
-			tmp->next = ft_strdup(prompt->lexer->str);
+			tmp->next = ft_lexernew(prompt->lexer->str, IDENTIFIER);
 			prompt->lexer = prompt->lexer->next;
 		}
 	}
@@ -47,15 +47,18 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 	}
 	while (prompt->lexer)
 	{
+		if (is_redirection(prompt->lexer->token))
+			return ;
 		if (prompt->lexer->token == IDENTIFIER)
 		{
 			if (prompt->flag == 0 && is_builtin(prompt->lexer->str))
 				cmds->builtin = ft_strdup(prompt->lexer->str);
-			else if (is_redirection(prompt->lexer->str))
-				break ;
+
 			else
+			{
 				cmds->str[prompt->flag] = ft_strdup(prompt->lexer->str);
-			prompt->flag++;	
+				prompt->flag++;
+			}	
 		}
 		prompt->lexer = prompt->lexer->next;
 	}
@@ -71,8 +74,9 @@ void	get_simple_cmds(t_prompt *prompt, int pipes)
 	cmds = prompt->simple_cmds;
 	while (prompt->lexer && pipes >= 0)
 	{
-		if (prompt->lexer->token && !ft_strncmp(prompt->lexer->token, "|", 1))
-		{
+		if (prompt->lexer->token && prompt->lexer->token == PIPE)
+		{		
+			
 			lexer_tmp = prompt->lexer->next;
 			pipes--;
 			prompt->flag = 0;
@@ -98,7 +102,7 @@ void	parser(t_prompt *prompt)
 	lexer = prompt->lexer;
 	while (lexer)
 	{
-		if (lexer->token && !ft_strncmp(lexer->token, "|", 1))
+		if (lexer->token && lexer->token == PIPE)
 			pipes++;
 		lexer = lexer->next;
 	}

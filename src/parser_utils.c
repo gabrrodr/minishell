@@ -6,21 +6,18 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:47:16 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 17:17:49 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:47:18 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	is_redirection(char **str)
+int	is_redirection(t_tokens tokenType)
 {
-	if (!str)
+	if (tokenType == LESS || tokenType == LESS_LESS
+		|| tokenType == GREAT || tokenType == GREAT_GREAT)
 		return (1);
-	if ((str[0] == "<" || str[0] == ">") && ft_strlen(str) == 1)
-		return (0);
-	if ((ft_strncmp(str, "<<", 2) || ft_strncmp(str, ">>", 2)) && ft_strlen(str) == 2)
-		return (0);
-	return (1);
+	return (0);
 }
 
 int	is_builtin(char *str)

@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:55:45 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 12:23:36 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:45:08 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	remove_quotes(char *str)
 int	ft_append_separator(t_tokens token, char **line, t_lexer **lexer_tok)
 {
 	t_lexer	*tok;
-	
-	tok = ft_lexernew(NULL, token, NULL);
+
+	tok = ft_lexernew(NULL, token);
 	if (!tok)
 		return (0);
 	ft_lexeradd_back(lexer_tok, tok);
