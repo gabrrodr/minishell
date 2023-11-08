@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 15:30:00 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:37:29 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ typedef struct s_prompt
 	t_simple_cmds	*simple_cmds;
 	t_lexer			*lexer;
 	char			**env;
-	int				flag;
+	//char			*input;
+	int				flg[3];
 }				t_prompt;
 
 //init
-t_prompt	*init_prompt(char **argv, char **env);
+t_prompt		*init_prompt(char **argv, char **env);
 t_simple_cmds	*init_simple_cmds(void);
 
 void	exit_env(t_prompt *prompt);
@@ -74,7 +75,7 @@ void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 
 //lexer
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type);
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 void	ft_clear_lexer(t_lexer **lexer);
 void	ft_skip_spaces(char **line);
@@ -89,11 +90,22 @@ t_lexer	*ms_lstlast(t_lexer *lst);
 
 //parser
 void	parser(t_prompt *prompt);
-int	is_redirection(t_tokens tokenType);
+int		is_redirection(t_tokens tokenType);
 int		is_builtin(char *str);
-int	nbr_nodes(t_lexer *lexer);
+int		nbr_nodes(t_lexer *lexer);
 void	alloc_double_array(int size, t_simple_cmds *cmds);
 
+//utils
+char	*array_to_str(char **arr);
+char    *get_env(t_prompt *prompt, char *val);
+char    *get_word(char *str);
 
+
+//void	replace_variables(t_prompt *prompt);
+char		*expand_input(t_prompt *prompt, char *input);
+t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
+
+//builtins
+void	ms_echo(char **args);
 
 #endif

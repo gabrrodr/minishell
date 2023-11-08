@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 18:05:40 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/07 11:45:23 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env)
+{	
+	t_prompt	*reset;
+	
+	free_data(prompt);
+	reset = init_prompt(argv, env);
+
+	return (reset);
+}
 
 void	free_array(char **arr)
 {

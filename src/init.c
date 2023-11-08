@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 13:16:26 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/07 11:43:01 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ t_prompt	*init_prompt(char **argv, char **env)
 		return (NULL);
 	prompt->lexer = NULL;
 	prompt->simple_cmds = init_simple_cmds();
-	prompt->flag = 0;
+	prompt->flg[0] = 0;
+	prompt->flg[1] = 0;
+	prompt->flg[2] = 0;
 	dupe_arr(prompt, env);
 	return (prompt);
 }
