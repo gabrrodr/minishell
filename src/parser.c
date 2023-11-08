@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 15:34:17 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/07 11:32:54 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	redirections(t_prompt *prompt, t_simple_cmds *cmds)
 		if (prompt->lexer && prompt->lexer->str)
 		{
 			tmp = ms_lstlast(cmds->redirect);
-			tmp->next = ft_lexernew(prompt->lexer->str, IDENTIFIER);
+			tmp->str = ft_strdup(prompt->lexer->str);
 			prompt->lexer = prompt->lexer->next;
 		}
 	}
@@ -46,13 +46,13 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 			return ;
 		if (prompt->lexer->token == IDENTIFIER)
 		{
-			if (prompt->flag == 0 && is_builtin(prompt->lexer->str))
+			if (prompt->flg[2] == 0 && is_builtin(prompt->lexer->str))
 				cmds->builtin = ft_strdup(prompt->lexer->str);
 
 			else
 			{
-				cmds->str[prompt->flag] = ft_strdup(prompt->lexer->str);
-				prompt->flag++;
+				cmds->str[prompt->flg[2]] = ft_strdup(prompt->lexer->str);
+				prompt->flg[2]++;
 			}	
 		}
 		if (prompt->lexer && prompt->lexer->token == PIPE)
@@ -76,7 +76,7 @@ void	get_simple_cmds(t_prompt *prompt, int pipes)
 			
 			prompt->lexer = prompt->lexer->next;
 			pipes--;
-			prompt->flag = 0;
+			prompt->flg[2] = 0;
 			cmds_tmp = init_simple_cmds();
 			cmds->next = cmds_tmp;
 			cmds_tmp->prev = cmds;
@@ -103,8 +103,9 @@ void	parser(t_prompt *prompt)
 			pipes++;
 		lexer = lexer->next;
 	}
-	prompt->simple_cmds = init_simple_cmds();
 	get_simple_cmds(prompt, pipes);
+	//replace_variables(prompt);
 	if (!prompt->simple_cmds)
 		return ;
+	
 }

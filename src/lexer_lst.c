@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:42:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/02 17:42:20 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:12:45 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,8 @@ t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
 	node = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!node)
 		return (NULL);
-	if (type == 't')
-	{
-		node->str = NULL;
-		node->token = ft_strdup(str);
-	}
-	else if (type == 'w')
-	{
-		node->str = ft_strdup(str);
-		node->token = NULL;
-	}
-	else
-	{
-		node->str = str;
-		node->token = tokenType;
-	}
+	node->str = str;
+	node->token = tokenType;
 	node->next = NULL;
 	node->prev = NULL;
 	return (node);
