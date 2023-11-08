@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 13:16:26 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:04:28 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_prompt	*init_prompt(char **argv, char **env)
 	prompt->lexer = NULL;
 	prompt->simple_cmds = init_simple_cmds();
 	prompt->flag = 0;
+	prompt->reset = false;
 	dupe_arr(prompt, env);
 	return (prompt);
 }

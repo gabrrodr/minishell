@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 15:34:17 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:55:02 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	redirections(t_prompt *prompt, t_simple_cmds *cmds)
 		if (prompt->lexer && prompt->lexer->str)
 		{
 			tmp = ms_lstlast(cmds->redirect);
-			tmp->next = ft_lexernew(prompt->lexer->str, IDENTIFIER);
+			tmp->str = ft_strdup(prompt->lexer->str);
 			prompt->lexer = prompt->lexer->next;
 		}
 	}
@@ -103,7 +103,6 @@ void	parser(t_prompt *prompt)
 			pipes++;
 		lexer = lexer->next;
 	}
-	prompt->simple_cmds = init_simple_cmds();
 	get_simple_cmds(prompt, pipes);
 	if (!prompt->simple_cmds)
 		return ;

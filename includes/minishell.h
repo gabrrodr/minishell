@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 15:30:00 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:35:08 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_prompt
 	t_lexer			*lexer;
 	char			**env;
 	int				flag;
+	bool			reset;
 }				t_prompt;
 
 //init
@@ -72,9 +73,12 @@ void	dupe_arr(t_prompt *prompt, char **arr);
 //frees
 void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
+void	free_lexer(t_lexer *lst);
+t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
+
 
 //lexer
-t_lexer	*ft_lexernew(char *str, t_tokens tokenType, char type);
+t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
 void	ft_clear_lexer(t_lexer **lexer);
 void	ft_skip_spaces(char **line);
@@ -94,6 +98,10 @@ int		is_builtin(char *str);
 int	nbr_nodes(t_lexer *lexer);
 void	alloc_double_array(int size, t_simple_cmds *cmds);
 
+//builtins
 
+void	ms_pwd(void);
+void	ms_echo(char **args);
+//int	ms_cd(char **args);
 
 #endif

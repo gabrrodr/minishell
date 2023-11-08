@@ -1,54 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/06 11:51:54 by mcarneir         ###   ########.fr       */
+/*   Created: 2023/11/06 15:07:02 by mcarneir          #+#    #+#             */
+/*   Updated: 2023/11/06 18:02:06 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	env_lines(char **arr)
+void	ms_pwd(void)
 {
-	int	i;
+	char	*pwd;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
+	pwd = getcwd(NULL, 0);
+	printf("%s", pwd);
+	free(pwd);
 }
 
-void	dupe_arr(t_prompt *prompt, char **arr)
+void	ms_echo(char **args) 
 {
-	int		i;
-	char	**dupe;
+    int	i;
 
-	i = env_lines(arr);
-	dupe = ft_calloc(i + 1, sizeof(char *));
-	if (!dupe)
-		return ;
 	i = 0;
-	while (arr[i])
+	if (args[i] && !ft_strncmp(args[i], "-n", 2))
 	{
-		dupe[i] = ft_strdup(arr[i]);
-		if (!dupe[i])
-		{
-			free_array(dupe);
-			return ;
-		}
 		i++;
+		while (args[i]) 
+		{
+        	printf("%s", args[i]);
+        	if (args[i + 1]) 
+			{
+            	printf(" ");
+			}
+			i++;
+    	}
+	} 
+	else
+	{
+        while (args[i]) 
+		{
+        	printf("%s", args[i]);
+        	if (args[i + 1])
+			{
+        		printf(" ");
+			}
+			i++;
+		}
+		printf("\n");
 	}
-	prompt->env = dupe;
-}
-
-void	exit_env(t_prompt *prompt)
-{
-	printf("exit\n");
-	free_data(prompt);
-	rl_clear_history();
-	exit(0);
 }
