@@ -68,7 +68,7 @@ t_prompt		*init_prompt(char **argv, char **env);
 t_simple_cmds	*init_simple_cmds(void);
 
 void	exit_env(t_prompt *prompt);
-void	dupe_arr(t_prompt *prompt, char **arr);
+char	**dupe_arr(char **arr);
 
 //frees
 void	free_array(char **arr);
@@ -112,5 +112,7 @@ void	ms_echo(char **args);
 void	print_args(char **args, int i);
 int	ms_cd(t_prompt *prompts, t_simple_cmds *cmds);
 
+int		ms_unset(t_prompt *prompt, t_simple_cmds *cmds);
+void	ms_env(t_prompt *prompt);
 
 #endif

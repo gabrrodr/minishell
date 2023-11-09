@@ -30,6 +30,9 @@ SRC = 	src/main.c \
 		src/parser_utils.c \
 		src/builtins.c \
 		src/builtins_utils.c \
+		src/unset.c \
+		src/env.c \
+		src/export.c \
 		
 
 OBJ_SRC = $(SRC:.c=.o)
