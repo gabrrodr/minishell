@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/08 14:32:59 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:14:57 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	env_lines(char **arr)
 	return (i);
 }
 
-void	dupe_arr(t_prompt *prompt, char **arr)
+char	**dupe_arr(char **arr)
 {
 	int		i;
 	char	**dupe;
@@ -66,7 +66,7 @@ void	dupe_arr(t_prompt *prompt, char **arr)
 	i = env_lines(arr);
 	dupe = ft_calloc(i + 1, sizeof(char *));
 	if (!dupe)
-		return ;
+		return (NULL);
 	i = 0;
 	while (arr[i])
 	{
@@ -74,11 +74,11 @@ void	dupe_arr(t_prompt *prompt, char **arr)
 		if (!dupe[i])
 		{
 			free_array(dupe);
-			return ;
+			return (NULL);
 		}
 		i++;
 	}
-	prompt->env = dupe;
+	return (dupe);
 }
 
 void	exit_env(t_prompt *prompt)

@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/07 14:13:31 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:43:58 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ int	main(int argc, char **argv, char **env)
 		{
 			parser(prompt);
 		}
-		ms_echo(prompt->simple_cmds->str);
+		//ms_echo(prompt->simple_cmds->str);
+		ms_unset(prompt, prompt->simple_cmds);
+		ms_env(prompt);
 		//dev_mod(prompt);
 		prompt = reset_prompt(prompt, argv, env);
 	}
