@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/08 14:37:29 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:15:29 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_prompt		*init_prompt(char **argv, char **env);
 t_simple_cmds	*init_simple_cmds(void);
 
 void	exit_env(t_prompt *prompt);
-void	dupe_arr(t_prompt *prompt, char **arr);
+char	**dupe_arr(char **arr);
 
 //frees
 void	free_array(char **arr);
@@ -107,5 +107,7 @@ t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
 
 //builtins
 void	ms_echo(char **args);
+int		ms_unset(t_prompt *prompt, t_simple_cmds *cmds);
+void	ms_env(t_prompt *prompt);
 
 #endif

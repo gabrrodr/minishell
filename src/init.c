@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/07 11:43:01 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:15:11 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ t_prompt	*init_prompt(char **argv, char **env)
 	prompt->flg[0] = 0;
 	prompt->flg[1] = 0;
 	prompt->flg[2] = 0;
-	dupe_arr(prompt, env);
+	prompt->env = dupe_arr(env);
 	return (prompt);
 }

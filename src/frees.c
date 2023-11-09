@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/07 11:45:23 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:43:49 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,18 @@
 t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env)
 {	
 	t_prompt	*reset;
+	char		**old_env;
 	
+	old_env = dupe_arr(prompt->env);
 	free_data(prompt);
 	reset = init_prompt(argv, env);
-
+	if (reset->env)
+	{	
+		free_array(reset->env);
+		reset->env = old_env;
+	}
+	else
+		free_array(old_env);
 	return (reset);
 }
 
