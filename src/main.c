@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/07 14:13:31 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:44:55 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			parser(prompt);
 		}
-		ms_echo(prompt->simple_cmds->str);
+		if (is_builtin(prompt->simple_cmds->builtin))
+			builtin(prompt, prompt->simple_cmds);
 		//dev_mod(prompt);
 		prompt = reset_prompt(prompt, argv, env);
 	}

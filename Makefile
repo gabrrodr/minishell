@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/11/08 14:36:43 by gabrrodr         ###   ########.fr        #
+#    Updated: 2023/11/08 16:40:50 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC = 	src/main.c \
 		src/parser.c \
 		src/parser_utils.c \
 		src/builtins.c \
+		src/builtins_utils.c \
 		
 
 OBJ_SRC = $(SRC:.c=.o)
