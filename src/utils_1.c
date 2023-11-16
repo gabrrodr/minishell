@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/09 12:14:57 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:20:26 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	**dupe_arr(char **arr)
 void	exit_env(t_prompt *prompt)
 {
 	printf("exit\n");
+	rl_clear_history();
 	free_data(prompt);
 	exit(0);
 }

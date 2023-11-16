@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/09 16:43:49 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:20:29 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ void	free_data(t_prompt *prompt)
 	{
 		free_lexer(prompt->lexer);
 	}
-	rl_clear_history();
 	free(prompt);
 }
