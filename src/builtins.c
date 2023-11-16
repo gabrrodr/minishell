@@ -6,19 +6,16 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/13 11:34:01 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:05:08 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ms_pwd(void)
+int	ms_pwd(t_prompt *prompt)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	printf("%s", pwd);
-	free(pwd);
+	ft_putendl_fd(prompt->pwd, STDOUT_FILENO);
+	return (0);
 }
 
 void	ms_echo(char **args) 
@@ -28,31 +25,20 @@ void	ms_echo(char **args)
 	i = 0;
 	if (args[i] && !ft_strncmp(args[i], "-n", 2))
 	{
-		i++;
-		while (args[i]) 
-		{
-        	printf("%s", args[i]);
-        	if (args[i + 1]) 
-			{
-            	printf(" ");
-			}
-			i++;
-    	}
-	} 
-	else
-	{
-        while (args[i]) 
-		{
-        	printf("%s", args[i]);
-        	if (args[i + 1])
-			{
-        		printf(" ");
-			}
-			i++;
-		}
-		printf("\n");
-	}
+        j = 1;
+        while (args[i][j] == 'n') 
+            j++;
+        if (args[i][j] == '\0') 
+            n_flag = 1;
+		else 
+            break;
+        i++;
+    }
+    print_args(args, i);
+    if (!n_flag) 
+        printf("\n");
 }
+
 
 int	builtin(t_prompt *prompt, t_simple_cmds *process)
 {
@@ -60,19 +46,19 @@ int	builtin(t_prompt *prompt, t_simple_cmds *process)
 
 	cmd = process->builtin;
 
-	if (!ft_strncmp(cmd, "pwd", 3))
-		ms_pwd();
-	else if (!ft_strncmp(cmd, "echo", 4))
+	if (!ft_strncmp(cmd, "pwd", 4))
+		ms_pwd(prompt);
+	else if (!ft_strncmp(cmd, "echo", 5))
 		ms_echo(prompt->simple_cmds->str);
-	else if (!ft_strncmp(cmd, "export", 6))
+	else if (!ft_strncmp(cmd, "export", 7))
 		ms_export(prompt, process);
-	else if (!ft_strncmp(cmd, "unset", 5))
+	else if (!ft_strncmp(cmd, "unset", 6))
 		ms_unset(prompt, process);
-	else if (!ft_strncmp(cmd, "env", 3))
+	else if (!ft_strncmp(cmd, "env", 4))
 		ms_env(prompt);
 	//else if (!ft_strncmp(cmd, "exit", 4))
 	//	ms_exit(prompt, process);
-	//else if (!ft_strncmp(cmd, "cd", 2))
-	//	ms_cd(prompt, process);
+	else if (!ft_strncmp(cmd, "cd", 3))
+		ms_cd(prompt, process);
 	return (0);
 }
