@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/09 12:29:42 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:05:08 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,21 @@ int	builtin(t_prompt *prompt, t_simple_cmds *process)
 
 	cmd = process->builtin;
 
-	if (!ft_strncmp(cmd, "pwd", 3))
-		ms_pwd();
-	else if (!ft_strncmp(cmd, "echo", 4))
+	if (!ft_strncmp(cmd, "pwd", 4))
+		ms_pwd(prompt);
+	else if (!ft_strncmp(cmd, "echo", 5))
 		ms_echo(prompt->simple_cmds->str);
-	else if (!ft_strncmp(cmd, "cd", 2))
+	else if (!ft_strncmp(cmd, "cd", 3))
 		ms_cd(prompt, process);
+	else if (!ft_strncmp(cmd, "env", 4))
+		ms_env(prompt);
 	return (0);
 }
 
-void	ms_pwd(void)
+int	ms_pwd(t_prompt *prompt)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	printf("%s\n", pwd);
-	free(pwd);
+	ft_putendl_fd(prompt->pwd, STDOUT_FILENO);
+	return (0);
 }
 
 void	ms_echo(char **args)
@@ -60,32 +59,5 @@ void	ms_echo(char **args)
         printf("\n");
 }
 
-int	ms_cd(t_prompt *prompts, t_simple_cmds *cmds)
-{
-	char	*path;
-	char	*pwd;
-	char	*oldpwd;
-
-	path = cmds->str[1];
-	if (!path)
-	{
-		pwd = getcwd(NULL, 0);
-		printf("%s\n", pwd);
-		free(pwd);
-		return (0);
-	}
-	if (chdir(path) == -1)
-	{
-		printf("cd: %s: No such file or directory\n", path);
-		return (1);
-	}
-	pwd = getcwd(NULL, 0);
-	oldpwd = ft_strdup(prompts->env[ft_getenv(prompts->env, "OLDPWD")]);
-	ft_setenv(prompts->env, "OLDPWD", oldpwd);
-	ft_setenv(prompts->env, "PWD", pwd);
-	free(pwd);
-	free(oldpwd);
-	return (0);
-}
 
 

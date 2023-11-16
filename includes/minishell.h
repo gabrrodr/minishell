@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/09 12:29:53 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:16:02 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_prompt
 	char			**env;
 	//char			*input;
 	int				flg[3];
+	char			*pwd;
+	char			*oldpwd;
 }				t_prompt;
 
 //init
@@ -99,6 +101,9 @@ void	alloc_double_array(int size, t_simple_cmds *cmds);
 char	*array_to_str(char **arr);
 char    *get_env(t_prompt *prompt, char *val);
 char    *get_word(char *str);
+int	find_pwd(t_prompt *prompt);
+void print_new_directory(t_prompt *tools);
+char	*find_path_ret(char *str, t_prompt *tools);
 
 
 //void	replace_variables(t_prompt *prompt);
@@ -107,11 +112,10 @@ t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
 
 //builtins
 int	builtin(t_prompt *prompt, t_simple_cmds *process);
-void	ms_pwd(void);
+int	ms_pwd(t_prompt *prompt);
 void	ms_echo(char **args);
 void	print_args(char **args, int i);
-int	ms_cd(t_prompt *prompts, t_simple_cmds *cmds);
-
+int	ms_cd(t_prompt *tools, t_simple_cmds *simple_cmd);
 int		ms_unset(t_prompt *prompt, t_simple_cmds *cmds);
 void	ms_env(t_prompt *prompt);
 

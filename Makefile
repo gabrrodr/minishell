@@ -6,7 +6,7 @@
 #    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/11/08 16:40:50 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/11/14 10:50:29 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = 	src/main.c \
 		src/unset.c \
 		src/env.c \
 		src/export.c \
+		src/cd.c \
 		
 
 OBJ_SRC = $(SRC:.c=.o)

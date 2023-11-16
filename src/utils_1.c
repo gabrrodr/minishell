@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/09 12:14:57 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:17:36 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@ char    *get_env(t_prompt *prompt, char *val)
 {
    int       i[3];
 
-   if (!val)
+   if (!val || !prompt->env)
       return (NULL);
    i[0] = -1;
    while (prompt->env[++i[0]])
    {
       if (!ft_strncmp(val, prompt->env[i[0]], ft_strlen(val)))
       {
-         free(val);
          i[1] = 0;
          while (prompt->env[i[0]][i[1]] != '=')
             i[1]++;
-         val = ft_calloc(ft_strlen(prompt->env[i[0]]) - i[1] + 1,
+         val = ft_calloc(ft_strlen(prompt->env[i[0]]) + i[1] + 1,
                sizeof(char));
          if (!val)
             return (NULL);
@@ -37,7 +36,6 @@ char    *get_env(t_prompt *prompt, char *val)
          return (val);
       }
    }
-   free(val);
    return (NULL);
 }
 
