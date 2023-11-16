@@ -79,6 +79,5 @@ void	free_data(t_prompt *prompt)
 		free(prompt->pwd);
 	if (prompt->oldpwd)
 		free(prompt->oldpwd);
-	rl_clear_history();
 	free(prompt);
 }

@@ -84,6 +84,7 @@ char	**dupe_arr(char **arr)
 void	exit_env(t_prompt *prompt)
 {
 	printf("exit\n");
+	rl_clear_history();
 	free_data(prompt);
 	exit(0);
 }
