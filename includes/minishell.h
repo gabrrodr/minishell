@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/09 12:29:53 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:43:22 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,18 @@ char		*expand_input(t_prompt *prompt, char *input);
 t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
 
 //builtins
-int	builtin(t_prompt *prompt, t_simple_cmds *process);
-void	ms_pwd(void);
 void	ms_echo(char **args);
-void	print_args(char **args, int i);
-int	ms_cd(t_prompt *prompts, t_simple_cmds *cmds);
-
 int		ms_unset(t_prompt *prompt, t_simple_cmds *cmds);
 void	ms_env(t_prompt *prompt);
+int		ms_export(t_prompt *prompt, t_simple_cmds *cmds);
+int		builtin(t_prompt *prompt, t_simple_cmds *process);
+
+
+//export
+int		check_equal(t_prompt *prompt, t_simple_cmds *cmds, int i);
+void	sub_value(t_prompt *prompt, t_simple_cmds *cmds, int i);
+int		check_variable(t_prompt *prompt, char *new);
+int		check_key(t_prompt *prompt, t_simple_cmds *cmds, int i);
+
 
 #endif
