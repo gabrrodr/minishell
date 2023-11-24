@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/11/24 14:26:47 by gabrrodr         ###   ########.fr        #
+#    Updated: 2023/11/24 13:20:20 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,12 @@ SRC = 	src/main.c \
 		src/env.c \
 		src/export.c \
 		src/export_utils.c \
+		src/str_expander.c \
+		src/str_expander_utils.c \
+		src/str_expander_utils2.c \
+		src/errors.c \
+		src/execute.c \
+		src/redirects.c \
 		src/signals.c \
 		src/cd.c \
 		src/exit.c \

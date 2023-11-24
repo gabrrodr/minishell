@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 14:42:31 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:09:17 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env)
 	old_env = dupe_arr(prompt->env);
 	free_data(prompt);
 	reset = init_prompt(argv, env);
+	reset->reset = true;
 	if (reset->env)
 	{	
 		free_array(reset->env);
@@ -75,10 +76,14 @@ void	free_data(t_prompt *prompt)
 		free_parser(prompt->simple_cmds);
 	if (prompt->lexer)
 		free_lexer(prompt->lexer);
+	if (prompt->pid)
+		free(prompt->pid);
 	if (prompt->pwd)
 		free(prompt->pwd);
 	if (prompt->oldpwd)
 		free(prompt->oldpwd);
+	if (prompt->exit_codes)
+		free(prompt->exit_codes);
 	if (prompt->heredoc)
 		free(prompt->heredoc);
 	free(prompt);

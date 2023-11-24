@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 14:26:18 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:19:48 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@
 # include <signal.h>
 # include <limits.h>
 
-
-typedef struct s_heredoc
-{
-	int		error_num;
-}	t_heredoc;
-
 typedef enum s_tokens
 {
 	IDENTIFIER,
@@ -42,6 +36,12 @@ typedef enum s_tokens
 	LESS,
 	LESS_LESS,
 }				t_tokens;
+
+typedef struct s_heredoc
+{
+	bool	status;
+	int		err_num;
+}			t_heredoc;
 
 typedef struct s_lexer
 {
@@ -70,14 +70,18 @@ typedef struct s_prompt
 	char			**env;
 	//char			*input;
 	int				flg[3];
+	int				*pid;
 	char			*pwd;
 	char			*oldpwd;
+	bool			reset;
+	int				*exit_codes;
 	bool			interact;
 }				t_prompt;
 
 //init
 t_prompt		*init_prompt(char **argv, char **env);
 t_simple_cmds	*init_simple_cmds(void);
+int				init_pid(t_prompt *prompt);
 
 void	exit_env(t_prompt *prompt);
 char	**dupe_arr(char **arr);
@@ -114,6 +118,7 @@ char    *get_word(char *str);
 void	print_args(char **args, int i);
 void	print_new_directory(t_prompt *tools);
 char	*find_path_ret(char *str, t_prompt *tools);
+void	init_exit_codes(t_prompt *prompt, char *input);
 
 
 //void	replace_variables(t_prompt *prompt);
@@ -133,7 +138,6 @@ int		ms_exit(t_prompt *prompt, t_simple_cmds *cmds);
 char	**ms_setenv(char *variable, char *value, char **env);
 char	*ms_getenv(char **env, char *var);
 
-
 //export
 int		check_equal(t_prompt *prompt, t_simple_cmds *cmds, int i);
 void	sub_value(t_prompt *prompt, t_simple_cmds *cmds, int i);
@@ -144,6 +148,24 @@ char	**sort_export(t_prompt *prompt);
 //signals
 void	set_sign(void);
 void	execute_signal(int sig, void *prompt);
+
+//expander
+char	*delquotes(char *str, char c);
+int		if_digit(char *str, int i);
+char	*char_to_str(char c);
+int		equal_sign(char *str);
+int		dol_sign(char *str);
+char	*str_expander(t_prompt *prompt, char *str);
+char **single_cmd_expander(t_prompt *prompt, char **str);
+
+//error
+int ms_error(int error);
+
+//execute
+int	execute(t_prompt *prompt);
+
+//redirects
+int	setup_redirect(t_simple_cmds *cmd);
 
 //cmds
 int	cmds(t_prompt *prompt);

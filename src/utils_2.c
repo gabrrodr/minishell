@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/23 11:55:47 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:44:57 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ char   *expand_input(t_prompt *prompt, char *input)
 	char   **arr;
 	int       i;
 	
+	prompt->flg[2] = 0;
+	init_exit_codes(prompt, input);
+	if (!prompt->exit_codes)
+		return (NULL);
 	arr = ft_split(input, ' ');
 	if (!arr)
 	  return (NULL);
