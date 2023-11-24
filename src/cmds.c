@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 14:34:22 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:32:11 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (cmds->builtin)
 	{
 		status = builtin(prompt, cmds);
-		prompt->heredoc->error_num += status;
+		prompt->heredoc->err_num += status;
 		exit(status);
 	}
 	else if (cmds->str[0])
@@ -84,7 +84,7 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (cmd && (!ft_strncmp(cmd, "exit", 4) || !ft_strncmp(cmd, "cd", 2)
 			|| !ft_strncmp(cmd, "export", 6) || !ft_strncmp(cmd, "unset", 5)))
 	{
-		prompt->heredoc->error_num += builtin(prompt, prompt->simple_cmds);
+		prompt->heredoc->err_num += builtin(prompt, prompt->simple_cmds);
 		g_code = 0;
 		return (0);
 	}

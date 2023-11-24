@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/23 15:08:50 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:30:47 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	init_pid(t_prompt *prompt)
 	if (!prompt->pid)
 		return (ms_error(1));
 	return (0);
+}
 
 t_prompt	*init_vars(t_prompt *prompt, char **argv, char *key)
 {
@@ -84,7 +85,7 @@ t_prompt	*init_prompt(char **argv, char **env)
 		return (NULL);
 	prompt->heredoc->err_num = 0;
 	prompt->heredoc->status = false;
-  prompt->interact = false;
+ 	prompt->interact = false;
 	prompt->flg[0] = 0;
 	prompt->flg[1] = 0;
 	prompt->flg[2] = 0;

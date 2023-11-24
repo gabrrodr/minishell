@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:02:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/24 13:18:56 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:33:35 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	setup_redirect(t_simple_cmds *cmd)
 				if (handle_infile(redirect->str))
 					return (1);
 		}
-		else if (redirect->token = LESS_LESS)
+		else if (redirect->token == LESS_LESS)
 		{
 			if (handle_infile(cmd->hd_file_name))
 				return (1);
