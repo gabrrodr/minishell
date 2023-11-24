@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:31:37 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 13:50:54 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:42:34 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,26 @@ char *array_to_str(char **arr)
     cat_str(str, result, total_length);
 	free_array(arr);
     return (result);
+}
+
+void	init_exit_codes(t_prompt *prompt, char *input)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+
+	while (input[++i])
+	{
+		if (input[i] == '$')
+			if (input[i + 1] && input[i + 1] == '?')
+				count++;
+	}
+	prompt->exit_codes = malloc(count * sizeof(int));
+	if (!prompt->exit_codes)
+		return ;
+	i = -1;
+	while (++i < count)
+		prompt->exit_codes[i] = 0;
 }
