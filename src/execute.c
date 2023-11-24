@@ -6,13 +6,13 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/23 16:31:12 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:33:09 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+extern int	g_code;
 
 static int	dup_process(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[2])
 {
@@ -101,8 +101,8 @@ int	execute(t_prompt *prompt)
 	{
 		if (cmd->next)
 			pipe(end);
-		if (send_heredoc(prompt, cmd));
-			return (1);
+		/*if (send_heredoc(prompt, cmd));
+			return (1);*/
 		if (ft_fork(prompt, cmd, fd_in, end))
 			return (1);
 		close(end[1]);

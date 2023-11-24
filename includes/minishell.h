@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 13:19:48 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:33:58 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,8 @@ int	setup_redirect(t_simple_cmds *cmd);
 
 //cmds
 int	cmds(t_prompt *prompt);
-int	ms_error(int error);
 int	handle_error_cmd(t_simple_cmds *cmds);
+int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds);
+int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds);
 
 #endif

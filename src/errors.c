@@ -6,17 +6,17 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:05:23 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/23 13:12:09 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:28:33 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+extern int	g_code;
 
 int ms_error(int error)
 {
-	g_status = error;
+	g_code = error;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error == 0)
 		ft_putstr_fd("syntax error near unexpected token 'newline'\n",
