@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/23 17:53:04 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:50:50 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ int	builtin(t_prompt *prompt, t_simple_cmds *process)
 
 	cmd = process->builtin;
 
-	if (!ft_strncmp(cmd, "pwd", 3))
+	if (!ft_strncmp(cmd, "pwd", 4))
 		ms_pwd(prompt);
-	else if (!ft_strncmp(cmd, "echo", 4))
+	else if (!ft_strncmp(cmd, "echo", 5))
 		ms_echo(prompt->simple_cmds->str);
-	else if (!ft_strncmp(cmd, "export", 6))
+	else if (!ft_strncmp(cmd, "export", 7))
 		ms_export(prompt, process);
-	else if (!ft_strncmp(cmd, "unset", 5))
+	else if (!ft_strncmp(cmd, "unset", 6))
 		ms_unset(prompt, process);
-	else if (!ft_strncmp(cmd, "env", 3))
+	else if (!ft_strncmp(cmd, "env", 4))
 		ms_env(prompt);
-	else if (!ft_strncmp(cmd, "exit", 4))
+	else if (!ft_strncmp(cmd, "exit", 5))
 		ms_exit(prompt, process);
-	else if (!ft_strncmp(cmd, "cd", 2))
+	else if (!ft_strncmp(cmd, "cd", 3))
 		ms_cd(prompt, process);
 	return (0);
 }
