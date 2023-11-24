@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 13:45:11 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:42:31 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ void	free_data(t_prompt *prompt)
 		free(prompt->pwd);
 	if (prompt->oldpwd)
 		free(prompt->oldpwd);
+	if (prompt->heredoc)
+		free(prompt->heredoc);
 	free(prompt);
 }
