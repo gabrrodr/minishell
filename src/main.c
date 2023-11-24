@@ -6,11 +6,13 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 13:51:01 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:34:53 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	g_code;
 
 /*static void dev_mod(t_prompt *prompt)
 {
@@ -60,24 +62,44 @@
    //exit(1);
 }*/
 
-int	main(int argc, char **argv, char **env)
+
+static void	end_program(char *input, t_prompt *prompt)
+{
+	free(input);
+	free_data(prompt);
+	rl_clear_history();
+}
+
+static t_prompt	*start_program(int argc, char **argv, char **env)
 {
 	t_prompt	*prompt;
-	char		*input;
-	
+
 	if (argc > 1)
 	{
 		printf("No arguments, please!\n");
 		exit(1);
 	}
 	prompt = init_prompt(argv, env);
+	set_sign();
+	execute_signal(0, prompt);
+	return (prompt);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	t_prompt	*prompt;
+	char		*input;
+	
+	prompt = start_program(argc, argv, env);
 	while (prompt)
 	{
+		prompt->interact = true;
 		input = readline("\001\e[1;35m\002minishell$ \001\e[0m\002");
-		if (input == NULL || !ft_strcmp(input, "exit"))
+		prompt->interact = false;
+		if (input == NULL)
 		{
 			free(input);
-			exit_env(prompt);
+			ms_exit(prompt, NULL);
 		}
 		add_history(input);
 		if (!input || !input[0])
@@ -88,9 +110,11 @@ int	main(int argc, char **argv, char **env)
 		{
 			parser(prompt);
 		}
-		builtin(prompt, prompt->simple_cmds);
+		//builtin(prompt, prompt->simple_cmds);
 		//dev_mod(prompt);
+		if (prompt->simple_cmds)
+			cmds(prompt);
 		prompt = reset_prompt(prompt, argv, env);
 	}
-	exit_env(prompt);
+	end_program(input, prompt);
 }

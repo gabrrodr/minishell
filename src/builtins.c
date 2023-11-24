@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 14:05:08 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:53:04 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ int	ms_pwd(t_prompt *prompt)
 	return (0);
 }
 
-void	ms_echo(char **args) 
+void	ms_echo(char **args)
 {
-    int	i;
+    int i;
+	int j;
+    int n_flag;
 
 	i = 0;
-	if (args[i] && !ft_strncmp(args[i], "-n", 2))
+	n_flag = 0;
+    while (args[i] && args[i][0] == '-' && args[i][1] == 'n') 
 	{
         j = 1;
         while (args[i][j] == 'n') 
@@ -39,26 +42,25 @@ void	ms_echo(char **args)
         printf("\n");
 }
 
-
 int	builtin(t_prompt *prompt, t_simple_cmds *process)
 {
 	char	*cmd;
 
 	cmd = process->builtin;
 
-	if (!ft_strncmp(cmd, "pwd", 4))
+	if (!ft_strncmp(cmd, "pwd", 3))
 		ms_pwd(prompt);
-	else if (!ft_strncmp(cmd, "echo", 5))
+	else if (!ft_strncmp(cmd, "echo", 4))
 		ms_echo(prompt->simple_cmds->str);
-	else if (!ft_strncmp(cmd, "export", 7))
+	else if (!ft_strncmp(cmd, "export", 6))
 		ms_export(prompt, process);
-	else if (!ft_strncmp(cmd, "unset", 6))
+	else if (!ft_strncmp(cmd, "unset", 5))
 		ms_unset(prompt, process);
-	else if (!ft_strncmp(cmd, "env", 4))
+	else if (!ft_strncmp(cmd, "env", 3))
 		ms_env(prompt);
-	//else if (!ft_strncmp(cmd, "exit", 4))
-	//	ms_exit(prompt, process);
-	else if (!ft_strncmp(cmd, "cd", 3))
+	else if (!ft_strncmp(cmd, "exit", 4))
+		ms_exit(prompt, process);
+	else if (!ft_strncmp(cmd, "cd", 2))
 		ms_cd(prompt, process);
 	return (0);
 }

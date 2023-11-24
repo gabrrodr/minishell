@@ -6,11 +6,36 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:28:47 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 13:00:54 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/20 11:08:34 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	**sort_export(t_prompt *prompt)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (prompt->env[i])
+	{
+		j = i + 1;
+		while (prompt->env[j])
+		{
+			if (ft_strcmp(prompt->env[i], prompt->env[j]) > 0)
+			{
+				tmp = prompt->env[i];
+				prompt->env[i] = prompt->env[j];
+				prompt->env[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (prompt->env);
+}
 
 int	check_equal(t_prompt *prompt, t_simple_cmds *cmds, int i)
 {
