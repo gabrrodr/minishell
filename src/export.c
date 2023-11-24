@@ -6,32 +6,32 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:27 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 15:42:41 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:40:02 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	print_export(t_prompt *prompt)
+void	print_export(char **env)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (prompt->env[++i])
+	while (env[++i])
 	{
 		j = 0;
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		while (prompt->env[i][j] != '=' && prompt->env[i][j])
+		while (env[i][j] != '=' && env[i][j])
 		{
-			ft_putchar_fd(prompt->env[i][j], STDOUT_FILENO);
+			ft_putchar_fd(env[i][j], STDOUT_FILENO);
 			j++;
-			if (prompt->env[i][j] == '=')
+			if (env[i][j] == '=')
 			{
 				ft_putstr_fd("=\"", STDOUT_FILENO);
 				j++;
-				while (prompt->env[i][j])
-					ft_putchar_fd(prompt->env[i][j++], STDOUT_FILENO);
+				while (env[i][j])
+					ft_putchar_fd(env[i][j++], STDOUT_FILENO);
 				ft_putchar_fd('"', STDOUT_FILENO);
 			}
 		}
@@ -108,12 +108,14 @@ int	check_variable(t_prompt *prompt, char *new)
 
 int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 {
+	char	**env;
 	char	**tmp;
 	int		i;
 
 	i = -1;
+	env = sort_export(prompt);
 	if (!cmds->str[0])
-		print_export(prompt);
+		print_export(env);
 	else
 		while (cmds->str[++i])
 		{

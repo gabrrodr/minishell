@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	g_status;
-
 #include "../includes/minishell.h"
+
+int	g_code;
 
 /*static void dev_mod(t_prompt *prompt)
 {
@@ -62,24 +62,44 @@ int	g_status;
    //exit(1);
 }*/
 
-int	main(int argc, char **argv, char **env)
+
+static void	end_program(char *input, t_prompt *prompt)
+{
+	free(input);
+	free_data(prompt);
+	rl_clear_history();
+}
+
+static t_prompt	*start_program(int argc, char **argv, char **env)
 {
 	t_prompt	*prompt;
-	char		*input;
-	
+
 	if (argc > 1)
 	{
 		printf("No arguments, please!\n");
 		exit(1);
 	}
 	prompt = init_prompt(argv, env);
+	set_sign();
+	execute_signal(0, prompt);
+	return (prompt);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	t_prompt	*prompt;
+	char		*input;
+	
+	prompt = start_program(argc, argv, env);
 	while (prompt)
 	{
+		prompt->interact = true;
 		input = readline("\001\e[1;35m\002minishell$ \001\e[0m\002");
-		if (input == NULL || !ft_strcmp(input, "exit"))
+		prompt->interact = false;
+		if (input == NULL)
 		{
 			free(input);
-			exit_env(prompt);
+			ms_exit(prompt, NULL);
 		}
 		add_history(input);
 		if (!input || !input[0])
@@ -91,9 +111,8 @@ int	main(int argc, char **argv, char **env)
 			parser(prompt);
 		}
 		if (prompt->simple_cmds && !init_pid(prompt))
-			builtin(prompt, prompt->simple_cmds);
-		//dev_mod(prompt);
+			cmds(prompt);
 		prompt = reset_prompt(prompt, argv, env);
 	}
-	exit_env(prompt);
+	end_program(input, prompt);
 }

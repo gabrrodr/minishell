@@ -33,7 +33,6 @@ SRC = 	src/main.c \
 		src/unset.c \
 		src/env.c \
 		src/export.c \
-		src/cd.c \
 		src/export_utils.c \
 		src/str_expander.c \
 		src/str_expander_utils.c \
@@ -41,6 +40,11 @@ SRC = 	src/main.c \
 		src/errors.c \
 		src/execute.c \
 		src/redirects.c \
+		src/signals.c \
+		src/cd.c \
+		src/exit.c \
+		src/cmds.c \
+		src/cmds_utils.c \
 
 OBJ_SRC = $(SRC:.c=.o)
 

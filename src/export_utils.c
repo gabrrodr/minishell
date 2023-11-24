@@ -12,6 +12,31 @@
 
 #include "../includes/minishell.h"
 
+char	**sort_export(t_prompt *prompt)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (prompt->env[i])
+	{
+		j = i + 1;
+		while (prompt->env[j])
+		{
+			if (ft_strcmp(prompt->env[i], prompt->env[j]) > 0)
+			{
+				tmp = prompt->env[i];
+				prompt->env[i] = prompt->env[j];
+				prompt->env[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (prompt->env);
+}
+
 int	check_equal(t_prompt *prompt, t_simple_cmds *cmds, int i)
 {
 	if (ft_strchr(cmds->str[i], '='))

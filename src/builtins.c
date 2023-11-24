@@ -42,7 +42,6 @@ void	ms_echo(char **args)
         printf("\n");
 }
 
-
 int	builtin(t_prompt *prompt, t_simple_cmds *process)
 {
 	char	*cmd;
@@ -59,8 +58,8 @@ int	builtin(t_prompt *prompt, t_simple_cmds *process)
 		ms_unset(prompt, process);
 	else if (!ft_strncmp(cmd, "env", 4))
 		ms_env(prompt);
-	//else if (!ft_strncmp(cmd, "exit", 4))
-	//	ms_exit(prompt, process);
+	else if (!ft_strncmp(cmd, "exit", 5))
+		ms_exit(prompt, process);
 	else if (!ft_strncmp(cmd, "cd", 3))
 		ms_cd(prompt, process);
 	return (0);

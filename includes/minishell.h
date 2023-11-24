@@ -24,6 +24,8 @@
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 # include <fcntl.h>
+# include <signal.h>
+# include <limits.h>
 
 typedef enum s_tokens
 {
@@ -73,6 +75,7 @@ typedef struct s_prompt
 	char			*oldpwd;
 	bool			reset;
 	int				*exit_codes;
+	bool			interact;
 }				t_prompt;
 
 //init
@@ -112,6 +115,7 @@ void	alloc_double_array(int size, t_simple_cmds *cmds);
 char	*array_to_str(char **arr);
 char    *get_env(t_prompt *prompt, char *val);
 char    *get_word(char *str);
+void	print_args(char **args, int i);
 void	print_new_directory(t_prompt *tools);
 char	*find_path_ret(char *str, t_prompt *tools);
 void	init_exit_codes(t_prompt *prompt, char *input);
@@ -122,21 +126,28 @@ char		*expand_input(t_prompt *prompt, char *input);
 t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
 
 //builtins
-int	builtin(t_prompt *prompt, t_simple_cmds *process);
-int	ms_pwd(t_prompt *prompt);
 void	ms_echo(char **args);
-void	print_args(char **args, int i);
-int	ms_cd(t_prompt *tools, t_simple_cmds *simple_cmd);
 int		ms_unset(t_prompt *prompt, t_simple_cmds *cmds);
 void	ms_env(t_prompt *prompt);
 int		ms_export(t_prompt *prompt, t_simple_cmds *cmds);
 int		builtin(t_prompt *prompt, t_simple_cmds *process);
+int		ms_cd(t_prompt *tools, t_simple_cmds *simple_cmd);
+int		ms_exit(t_prompt *prompt, t_simple_cmds *cmds);
+
+//env
+char	**ms_setenv(char *variable, char *value, char **env);
+char	*ms_getenv(char **env, char *var);
 
 //export
 int		check_equal(t_prompt *prompt, t_simple_cmds *cmds, int i);
 void	sub_value(t_prompt *prompt, t_simple_cmds *cmds, int i);
 int		check_variable(t_prompt *prompt, char *new);
 int		check_key(t_prompt *prompt, t_simple_cmds *cmds, int i);
+char	**sort_export(t_prompt *prompt);
+
+//signals
+void	set_sign(void);
+void	execute_signal(int sig, void *prompt);
 
 //expander
 char	*delquotes(char *str, char c);
@@ -156,5 +167,9 @@ int	execute(t_prompt *prompt);
 //redirects
 int	setup_redirect(t_simple_cmds *cmd);
 
+//cmds
+int	cmds(t_prompt *prompt);
+int	ms_error(int error);
+int	handle_error_cmd(t_simple_cmds *cmds);
 
 #endif
