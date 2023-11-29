@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_expander_utils2.c                              :+:      :+:    :+:   */
+/*   exit_codes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 17:20:14 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/27 15:34:55 by mcarneir         ###   ########.fr       */
+/*   Created: 2023/11/27 13:56:29 by mcarneir          #+#    #+#             */
+/*   Updated: 2023/11/27 14:00:23 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_code;
-
-int	if_question_mark(void)
+bool is_exit_status(char *str)
 {
-	char	*str;
-	
-	str = ft_itoa(g_code);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	free(str);
-	return (127);
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '$')
+			if (str[i + 1] && str[i + 1] == '?')
+				return (true);
+	}
+	return (false);
+}
+
+int	current_exit_status(t_prompt *prompt)
+{
+	int	i;
+
+	i = 0;
+	while (prompt->exit_codes[i] == 2)
+		i++;
+	return (i);
 }

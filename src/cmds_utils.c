@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:24:24 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 16:34:28 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:21:31 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ extern int	g_code;
 int	handle_error_cmd(t_simple_cmds *cmds)
 {
 	char	*tmp;
+	char	*str;
 
 	if (!cmds->str && !cmds->str[0])
 		return (1);
@@ -24,8 +25,9 @@ int	handle_error_cmd(t_simple_cmds *cmds)
 		tmp = ft_strdup(cmds->str[0]);
 	else
 		tmp = ft_strdup("\'\'");
-	ft_strjoin(tmp, ": command not found");
-	ft_putendl_fd(tmp, STDERR_FILENO);
+	str = ft_strjoin(tmp, ": command not found");
+	ft_putendl_fd(str, STDERR_FILENO);
 	free(tmp);
+	free(str);
 	return (127);
 }

@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 16:30:47 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:45:26 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_prompt	*init_prompt(char **argv, char **env)
 	prompt->flg[0] = 0;
 	prompt->flg[1] = 0;
 	prompt->flg[2] = 0;
+	prompt->flg[3] = 0;
 	prompt->reset = false;
 	prompt->pid = NULL;
 	prompt->env = dupe_arr(env);

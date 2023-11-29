@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/23 11:45:01 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:14:07 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ int	is_digit(char *str)
 {
 	int	i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
+	{
 		if (!ft_isdigit(str[i]))
 			return (0);
+		i++;
+	}
 	return (1);
 }
 

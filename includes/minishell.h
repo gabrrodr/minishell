@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 16:33:58 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:45:13 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_prompt
 	t_heredoc		*heredoc;
 	char			**env;
 	//char			*input;
-	int				flg[3];
+	int				flg[4];
 	int				*pid;
 	char			*pwd;
 	char			*oldpwd;
@@ -115,10 +115,11 @@ void	alloc_double_array(int size, t_simple_cmds *cmds);
 char	*array_to_str(char **arr);
 char    *get_env(t_prompt *prompt, char *val);
 char    *get_word(char *str);
-void	print_args(char **args, int i);
+void	print_args(t_prompt *prompt, char **args, int i);
 void	print_new_directory(t_prompt *tools);
 char	*find_path_ret(char *str, t_prompt *tools);
 void	init_exit_codes(t_prompt *prompt, char *input);
+int		if_question_mark(void);
 
 
 //void	replace_variables(t_prompt *prompt);
@@ -126,7 +127,7 @@ char		*expand_input(t_prompt *prompt, char *input);
 t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env);
 
 //builtins
-void	ms_echo(char **args);
+void	ms_echo(char **args, t_prompt *prompt);
 int		ms_unset(t_prompt *prompt, t_simple_cmds *cmds);
 void	ms_env(t_prompt *prompt);
 int		ms_export(t_prompt *prompt, t_simple_cmds *cmds);
@@ -172,5 +173,9 @@ int	cmds(t_prompt *prompt);
 int	handle_error_cmd(t_simple_cmds *cmds);
 int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds);
 int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds);
+
+//exit codes
+bool is_exit_status(char *str);
+int	current_exit_status(t_prompt *prompt);
 
 #endif

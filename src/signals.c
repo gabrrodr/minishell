@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:45:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/23 11:44:16 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:02:17 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//extern int	g_code;
+extern int	g_code;
 
 void	execute_signal(int sig, void *prompt)
 {
@@ -38,7 +38,8 @@ void	execute_signal(int sig, void *prompt)
 	if (!(static_prompt->interact))
 		if (sig == SIGINT)
 			write(1, &"\n", 1);
-	
+	if (sig == SIGINT)
+		g_code = 130;
 }
 
 static void	handle_signal(int sig)
