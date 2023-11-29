@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/11/29 12:55:01 by mcarneir         ###   ########.fr       */
@@ -110,7 +110,7 @@ int	main(int argc, char **argv, char **env)
 			parser(prompt);
 		/*dev_mod(prompt);*/
 		if (prompt->simple_cmds && !init_pid(prompt))
-			cmds(prompt);
+			execute(prompt);
 		prompt = reset_prompt(prompt, argv, env);
 	}
 	end_program(input, prompt);

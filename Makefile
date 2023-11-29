@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
+#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
 #    Updated: 2023/11/27 13:56:57 by mcarneir         ###   ########.fr        #
@@ -46,6 +46,7 @@ SRC = 	src/main.c \
 		src/cmds.c \
 		src/cmds_utils.c \
 		src/exit_codes.c \
+		src/heredocs.c \
 
 OBJ_SRC = $(SRC:.c=.o)
 

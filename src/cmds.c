@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/11/29 12:02:19 by mcarneir         ###   ########.fr       */
@@ -57,7 +57,6 @@ int	system_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 
 int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 {
-
 	if (cmds->redirect)
 		if (setup_redirect(cmds))
 			exit(1);
@@ -88,7 +87,7 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 
 	status = 0;
 	cmd = cmds->builtin;
-	
+	prompt->simple_cmds = single_cmd_heredoc(prompt, cmds);
 	if (cmd && (!ft_strncmp(cmd, "exit", 5) || !ft_strncmp(cmd, "cd", 3)
 			|| !ft_strncmp(cmd, "export", 7) || !ft_strncmp(cmd, "unset", 6)))
 	{
@@ -96,6 +95,7 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 		g_code = prompt->heredoc->err_num;
 		return (0);
 	}
+	send_heredoc(prompt, prompt->simple_cmds);
 	pid = fork();
 	if (pid < 0)
 		ms_error(5);
@@ -104,15 +104,5 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_code = WEXITSTATUS(status);
-	return (0);
-}
-
-int	cmds(t_prompt *prompt)
-{
-	t_simple_cmds	*cmds;
-
-	cmds = prompt->simple_cmds;
-	if (!cmds->next)
-		return (single_cmd(prompt, cmds));
 	return (0);
 }

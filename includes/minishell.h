@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/11/27 16:45:13 by mcarneir         ###   ########.fr       */
@@ -157,7 +157,7 @@ char	*char_to_str(char c);
 int		equal_sign(char *str);
 int		dol_sign(char *str);
 char	*str_expander(t_prompt *prompt, char *str);
-char **single_cmd_expander(t_prompt *prompt, char **str);
+char 	**single_cmd_expander(t_prompt *prompt, char **str);
 
 //error
 int ms_error(int error);
@@ -177,5 +177,9 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds);
 //exit codes
 bool is_exit_status(char *str);
 int	current_exit_status(t_prompt *prompt);
+
+//heredocs
+int				send_heredoc(t_prompt *prompt, t_simple_cmds *cmds);
+t_simple_cmds	*single_cmd_heredoc(t_prompt *prompt, t_simple_cmds *cmds);
 
 #endif
