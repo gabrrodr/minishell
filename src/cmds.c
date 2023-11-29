@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/24 16:32:11 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:10:09 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,20 @@ int	system_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 
 int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 {
-	int		status;
-
-	status = 0;
+	if (cmds->redirect)
+	{
+		if (setup_redirect(cmds))
+			exit (1);
+	}
 	if (cmds->builtin)
 	{
-		status = builtin(prompt, cmds);
-		prompt->heredoc->err_num += status;
-		exit(status);
+		g_code = builtin(prompt, cmds);
+		prompt->heredoc->err_num += g_code;
+		exit(g_code);
 	}
 	else if (cmds->str[0])
-		status = system_cmd(prompt, cmds);
-	g_code = status;
-	exit(status);
+		g_code = system_cmd(prompt, cmds);
+	exit(g_code);
 }
 
 int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
@@ -80,14 +81,15 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 
 	status = 0;
 	cmd = cmds->builtin;
-	
+	prompt->simple_cmds = single_cmd_heredoc(prompt, cmds);
 	if (cmd && (!ft_strncmp(cmd, "exit", 4) || !ft_strncmp(cmd, "cd", 2)
 			|| !ft_strncmp(cmd, "export", 6) || !ft_strncmp(cmd, "unset", 5)))
 	{
 		prompt->heredoc->err_num += builtin(prompt, prompt->simple_cmds);
-		g_code = 0;
+		g_code = prompt->heredoc->err_num;
 		return (0);
 	}
+	send_heredoc(prompt, prompt->simple_cmds);
 	pid = fork();
 	if (pid < 0)
 		ms_error(5);
@@ -98,15 +100,5 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_code = WEXITSTATUS(status);
-	return (0);
-}
-
-int	cmds(t_prompt *prompt)
-{
-	t_simple_cmds	*cmds;
-
-	cmds = prompt->simple_cmds;
-	if (!cmds->next)
-		return (single_cmd(prompt, cmds));
 	return (0);
 }

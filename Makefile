@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
+#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/11/24 13:20:20 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/11/29 12:08:19 by gabrrodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = 	src/main.c \
 		src/exit.c \
 		src/cmds.c \
 		src/cmds_utils.c \
+		src/heredocs.c \
 
 OBJ_SRC = $(SRC:.c=.o)
 
