@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/24 16:33:09 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:33:52 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	execute(t_prompt *prompt)
 	{
 		if (cmd->next)
 			pipe(end);
-		/*if (send_heredoc(prompt, cmd));
-			return (1);*/
+		if (send_heredoc(prompt, cmd))
+			return (1);
 		if (ft_fork(prompt, cmd, fd_in, end))
 			return (1);
 		close(end[1]);
