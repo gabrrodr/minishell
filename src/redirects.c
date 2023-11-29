@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:02:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/24 16:33:35 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:32:28 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	handle_outfile(t_lexer *redirect)
 	else
 		fd_out = open(redirect->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd_out < 0)
-		return (ms_error(6));
+		return (ms_error(0));
 	if (dup2(fd_out, STDOUT_FILENO) < 0)
 		return (ms_error(4));
 	close(fd_out);
@@ -34,7 +34,7 @@ static int	handle_infile(char *str)
 
 	fd_in = open(str, O_RDONLY);
 	if (fd_in < 0)
-		return (ms_error(7));
+		return (ms_error(0));
 	if (fd_in > 0 && dup2(fd_in, STDIN_FILENO) < 0)
 		return (ms_error(4));
 	if (fd_in > 0)

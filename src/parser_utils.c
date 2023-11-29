@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:47:16 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 15:29:31 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:37:14 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	is_builtin(char *str)
 {
 	if (!str)
 		return (0);
-	if (!ft_strncmp(str, "echo", 4) || !ft_strncmp(str, "cd", 2) 
-		|| !ft_strncmp(str, "pwd", 3) || !ft_strncmp(str, "export", 6)
-		|| !ft_strncmp(str, "unset", 5) || !ft_strncmp(str, "env", 3)
-		|| !ft_strncmp(str, "exit", 4))
+	if (!ft_strncmp(str, "echo", 5) || !ft_strncmp(str, "cd", 3) 
+		|| !ft_strncmp(str, "pwd", 4) || !ft_strncmp(str, "export", 7)
+		|| !ft_strncmp(str, "unset", 6) || !ft_strncmp(str, "env", 4)
+		|| !ft_strncmp(str, "exit", 5))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 17:33:31 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:06:33 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ms_pwd(t_prompt *prompt)
 	return (0);
 }
 
-void	ms_echo(char **args)
+void	ms_echo(char **args, t_prompt *prompt)
 {
     int i;
 	int j;
@@ -37,7 +37,7 @@ void	ms_echo(char **args)
             break;
         i++;
     }
-    print_args(args, i);
+    print_args(prompt, args, i);
     if (!n_flag) 
         printf("\n");
 }
@@ -51,7 +51,7 @@ int	builtin(t_prompt *prompt, t_simple_cmds *process)
 	if (!ft_strncmp(cmd, "pwd", 4))
 		ms_pwd(prompt);
 	else if (!ft_strncmp(cmd, "echo", 5))
-		ms_echo(prompt->simple_cmds->str);
+		ms_echo(prompt->simple_cmds->str, prompt);
 	else if (!ft_strncmp(cmd, "export", 7))
 		ms_export(prompt, process);
 	else if (!ft_strncmp(cmd, "unset", 6))

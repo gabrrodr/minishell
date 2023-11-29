@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/21 12:44:57 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:59:05 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static char    *replace(t_prompt *prompt, char *str)
 	char   *word;
 
 	word = get_word(str);
+	if (!ft_strncmp(word, "?", 2))
+		prompt->exit_codes[prompt->flg[2]++] = 1;
 	var = get_env(prompt, get_word(str));
 	if (!var)
 	{
@@ -96,6 +98,8 @@ static void    expand_word(t_prompt *prompt, char **word)
          }
       }
    }
+   if (!is_expandable(*word) && is_exit_status(*word))
+	  prompt->exit_codes[prompt->flg[2]++] = 0;
 }
 
 char   *expand_input(t_prompt *prompt, char *input)

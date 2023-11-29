@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/29 13:10:09 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:02:19 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,21 @@ int	system_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	if (cmds->redirect)
-	{
 		if (setup_redirect(cmds))
-			exit (1);
-	}
+			exit(1);
 	if (cmds->builtin)
 	{
 		g_code = builtin(prompt, cmds);
 		prompt->heredoc->err_num += g_code;
 		exit(g_code);
+	}
+	else if (!ft_strncmp(cmds->str[0], "$?", 3))
+	{
+		if (prompt->exit_codes[current_exit_status(prompt)] == 1)
+			g_code = if_question_mark();
+		else
+			g_code = system_cmd(prompt, cmds);
+		prompt->exit_codes[current_exit_status(prompt)] = 2;
 	}
 	else if (cmds->str[0])
 		g_code = system_cmd(prompt, cmds);
@@ -82,8 +88,8 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	status = 0;
 	cmd = cmds->builtin;
 	prompt->simple_cmds = single_cmd_heredoc(prompt, cmds);
-	if (cmd && (!ft_strncmp(cmd, "exit", 4) || !ft_strncmp(cmd, "cd", 2)
-			|| !ft_strncmp(cmd, "export", 6) || !ft_strncmp(cmd, "unset", 5)))
+	if (cmd && (!ft_strncmp(cmd, "exit", 5) || !ft_strncmp(cmd, "cd", 3)
+			|| !ft_strncmp(cmd, "export", 7) || !ft_strncmp(cmd, "unset", 6)))
 	{
 		prompt->heredoc->err_num += builtin(prompt, prompt->simple_cmds);
 		g_code = prompt->heredoc->err_num;
@@ -94,9 +100,7 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (pid < 0)
 		ms_error(5);
 	if (pid == 0)
-	{
 		handle_cmd(prompt, prompt->simple_cmds);
-	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_code = WEXITSTATUS(status);
