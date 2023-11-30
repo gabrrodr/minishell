@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:52:05 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/23 12:40:15 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:43:42 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_lexer	*ft_handle_tokenize(char *str)
 	
 	error = 0;
 	lexer_tok = NULL;
-	while (*str)
+	while (str && *str)
 	{	
 		if (error)
 			return (ft_clear_lexer(&lexer_tok), NULL);

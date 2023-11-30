@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 16:45:13 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:54:14 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ char	**dupe_arr(char **arr);
 //frees
 void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
+void	free_lexer(t_lexer *lst);
+
+
 
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
@@ -158,6 +161,7 @@ int		equal_sign(char *str);
 int		dol_sign(char *str);
 char	*str_expander(t_prompt *prompt, char *str);
 char 	**single_cmd_expander(t_prompt *prompt, char **str);
+bool    solo_doll_sign(const char *str);
 
 //error
 int ms_error(int error);

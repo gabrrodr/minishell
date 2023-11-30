@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:25:54 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/02 13:26:53 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:58:10 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void	ft_print_q_err(char	c)
 {
 	ft_putstr_fd("minishell: unexpected EOF while looking for matching `", 2);
 	ft_putchar_fd(c, 2);
-	/*ft_putstr_fd("'\n", 2);*/
+	ft_putstr_fd("'\n", 2);
 }

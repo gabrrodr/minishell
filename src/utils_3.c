@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:31:37 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 13:57:03 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:53:59 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,23 @@ void	init_exit_codes(t_prompt *prompt, char *input)
 	i = -1;
 	while (++i < count)
 		prompt->exit_codes[i] = 0;
+}
+
+bool    solo_doll_sign(const char *str)
+{
+    int    i;
+    int    doll;
+
+    doll = 0;
+    i = -1;
+    while (str[++i])
+    {
+       if (str[i] == '$')
+          doll++;
+       if (str[i] != '\'' && str[i] != '\"' && str[i] != '$')
+          return (false);
+    }
+    if (doll > 1)
+       return (false);
+    return (true);
 }

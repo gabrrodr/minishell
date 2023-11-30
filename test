@@ -1,8 +1,0 @@
-includes
-libs
-Makefile
-minishell
-readline_leaks.txt
-README.md
-src
-test

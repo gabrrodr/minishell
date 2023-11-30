@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/29 12:55:01 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:20:55 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ int	main(int argc, char **argv, char **env)
 			continue;
 		input = expand_input(prompt, input);
 		prompt->lexer = lexer(input);
+		if (!prompt->lexer)
+		{
+			prompt = reset_prompt(prompt, argv, env);
+			continue;
+		}
 		if (prompt->lexer)
 			parser(prompt);
 		/*dev_mod(prompt);*/
