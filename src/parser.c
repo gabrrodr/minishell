@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 16:45:52 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:37:17 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 		{
 			if (prompt->flg[3] == 0 && is_builtin(prompt->lexer->str))
 				cmds->builtin = ft_strdup(prompt->lexer->str);
-
 			else
 			{
 				cmds->str[prompt->flg[3]] = ft_strdup(prompt->lexer->str);
@@ -84,7 +83,7 @@ void	get_simple_cmds(t_prompt *prompt, int pipes)
 		}
 		redirections(prompt, cmds);
 		if (prompt->lexer && prompt->lexer->token == PIPE)
-			continue ;
+			continue;
 		process_tokens(prompt, cmds);
 	}
 	prompt->lexer = lexer_tmp;
@@ -105,8 +104,6 @@ void	parser(t_prompt *prompt)
 	}
 	prompt->flg[3] = 0;
 	get_simple_cmds(prompt, pipes);
-	//replace_variables(prompt);
 	if (!prompt->simple_cmds)
 		return ;
-	
 }

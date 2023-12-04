@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:23:12 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/23 12:29:07 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:38:36 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,14 @@ char **single_cmd_expander(t_prompt *prompt, char **str)
 		str[0] = ft_strdup("");
 		return (str);
 	}
-	while(str[++i])
+	while(*str && str[++i] && str[i][0] != '\0')
 	{
 		j = dol_sign(str[i]);
 		if (dol_sign(str[i]) && (j > 0 && j - 2 >= 0
 				&& str[i][dol_sign(str[i]) - 2] != '\'')
 			&& dol_sign(str[i]) != 0 && str[i][dol_sign(str[i])] != '\0')
 		{
+			
 			tmp = expand(prompt, str[i]);
 			free(str[i]);
 			str[i] = tmp;

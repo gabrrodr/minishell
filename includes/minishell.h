@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 16:45:13 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:36:17 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	**dupe_arr(char **arr);
 //frees
 void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
+void	free_parser(t_simple_cmds *simple_cmds);
 
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
@@ -161,6 +162,8 @@ char 	**single_cmd_expander(t_prompt *prompt, char **str);
 
 //error
 int ms_error(int error);
+int	check_redirections(t_prompt *prompt);
+
 
 //execute
 int	execute(t_prompt *prompt);
@@ -169,7 +172,7 @@ int	execute(t_prompt *prompt);
 int	setup_redirect(t_simple_cmds *cmd);
 
 //cmds
-int	cmds(t_prompt *prompt);
+//int	cmds(t_prompt *prompt);
 int	handle_error_cmd(t_simple_cmds *cmds);
 int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds);
 int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds);

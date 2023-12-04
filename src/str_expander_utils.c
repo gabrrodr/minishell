@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_expander_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:37:10 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/22 17:26:55 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:31:53 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*delquotes(char *str, char c)
 	int	j;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == c)
 		{
@@ -54,7 +54,7 @@ int equal_sign(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '=')
 			return (i + 1);
@@ -68,7 +68,7 @@ int	dol_sign(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '$')
 			return (i + 1);

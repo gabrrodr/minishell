@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:47:16 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 16:37:14 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:49:41 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	nbr_nodes(t_lexer *lexer)
 
 void	alloc_double_array(int size, t_simple_cmds *cmds)
 {
-	cmds->str = malloc(sizeof(char *) * (size + 1));
+	cmds->str = ft_calloc(size + 1, sizeof(char *));
 	if (!cmds->str)
 		return ;
 	cmds->str[size] = NULL;

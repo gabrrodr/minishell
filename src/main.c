@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/29 12:55:01 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:49:57 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,13 @@ int	main(int argc, char **argv, char **env)
 			continue;
 		input = expand_input(prompt, input);
 		prompt->lexer = lexer(input);
-		if (prompt->lexer)
+		if (prompt->lexer && !check_redirections(prompt))
+		{
+			//dev_mod(prompt);
 			parser(prompt);
-		/*dev_mod(prompt);*/
-		if (prompt->simple_cmds && !init_pid(prompt))
-			execute(prompt);
+			if (prompt->simple_cmds && !init_pid(prompt))
+				execute(prompt);
+		}
 		prompt = reset_prompt(prompt, argv, env);
 	}
 	end_program(input, prompt);

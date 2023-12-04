@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/29 12:33:52 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:30:46 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	dup_process(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[
 	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
 		return (1);
 	close(end[0]);
-	if (cmd->next && dup2(fd_in, STDOUT_FILENO) < 0)
+	if (cmd->next && dup2(end[1], STDOUT_FILENO) < 0)
 		return (1);
 	close(end[1]);
 	if (cmd->prev)
@@ -94,7 +94,6 @@ int	execute(t_prompt *prompt)
 	
 	cmd = prompt->simple_cmds;
 	fd_in = STDIN_FILENO;
-
 	if (!cmd->next)
 		return(single_cmd(prompt, cmd));
 	while (cmd)
