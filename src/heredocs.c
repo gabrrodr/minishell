@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:17:23 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 18:38:15 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:27:34 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*set_file_name(void)
 	char		*tmp;
 
 	tmp = ft_itoa(i);
-	file_name = ft_strjoin("build/.tmp_heredoc_file_", tmp);
+	file_name = ft_strjoin(".tmp", tmp);
 	free(tmp);
 	i++;
 	return (file_name);
@@ -100,11 +100,11 @@ t_simple_cmds	*single_cmd_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 	redirect = cmds->redirect;
 	while (cmds->redirect)
 	{
-		if (redirect->token == LESS_LESS)
+		if (cmds->redirect->token == LESS_LESS)
 			cmds->redirect->str = str_expander(prompt, cmds->redirect->str);
-		if (redirect->next == NULL)
+		if (cmds->redirect->next == NULL)
 			break ;
-		redirect = redirect->next;
+		cmds->redirect = cmds->redirect->next;
 	}
 	cmds->redirect = redirect;
 	return (cmds);

@@ -6,6 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
+/*   Updated: 2023/12/04 16:49:57 by gabrrodr         ###   ########.fr       */
 /*   Updated: 2023/11/30 13:20:55 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -111,11 +112,12 @@ int	main(int argc, char **argv, char **env)
 			prompt = reset_prompt(prompt, argv, env);
 			continue;
 		}
-		if (prompt->lexer)
+    if (prompt->lexer && !check_redirections(prompt))
+    {
 			parser(prompt);
-		/*dev_mod(prompt);*/
-		if (prompt->simple_cmds && !init_pid(prompt))
-			execute(prompt);
+		  if (prompt->simple_cmds && !init_pid(prompt))
+				execute(prompt);
+		}
 		prompt = reset_prompt(prompt, argv, env);
 	}
 	end_program(input, prompt);

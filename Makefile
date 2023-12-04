@@ -6,7 +6,7 @@
 #    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/11/30 18:40:45 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/11/30 16:18:26 by gabrrodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC = 	src/main.c \
 		src/cmds_utils.c \
 		src/exit_codes.c \
 		src/heredocs.c \
+		src/redirection_error.c \
 
 OBJ_SRC = $(SRC:.c=.o)
 
