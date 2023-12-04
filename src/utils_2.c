@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 15:59:05 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:54:29 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void    expand_word(t_prompt *prompt, char **word)
    j = -1;
    while ((*word)[++j])
    {
-      if ((*word)[j] == '$' && is_expandable(*word))
+      if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word))
       {
          tmp = replace(prompt, *word);
          if (tmp)

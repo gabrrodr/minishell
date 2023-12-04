@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 14:50:59 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:28:36 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,24 @@ void	free_array(char **arr)
 	free(arr);
 }
 
-void	free_parser(t_simple_cmds *simple_cmds)
+static void	free_parser(t_simple_cmds *simple_cmds)
 {
-	if (simple_cmds->str)
-		free_array(simple_cmds->str);
-	if (simple_cmds->builtin)
-		free(simple_cmds->builtin);
-	if (simple_cmds->hd_file_name)
-		free(simple_cmds->hd_file_name);
-	free(simple_cmds);
+	t_simple_cmds	*tmp;
+	
+	while (simple_cmds)
+	{
+		if (simple_cmds->str)
+			free_array(simple_cmds->str);
+		if (simple_cmds->builtin)
+			free(simple_cmds->builtin);
+		if (simple_cmds->hd_file_name)
+			free(simple_cmds->hd_file_name);
+		if (simple_cmds->redirect)
+			free_lexer(simple_cmds->redirect);
+		tmp = simple_cmds;
+		simple_cmds = simple_cmds->next;
+		free (tmp);
+	}
 }
 
 void	free_lexer(t_lexer *lst)
