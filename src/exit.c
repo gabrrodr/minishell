@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 17:14:07 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:36:08 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ static void	exit_code(char **str)
 
 	if (!str[0])
 		exit_code = 0;
+	else if (str[0][0] == '#')
+		exit_code = g_code;
 	else if(is_digit(str[0]))
 		exit_code = ft_atoi(str[0]);
 	else if (str[0][0] == '-' && is_digit(str[0] + 1))
 		exit_code = 256 - ft_atoi(str[0] + 1);
+	else if (str[0][0] == '+'  && is_digit(str[0] + 1))
+		exit_code = ft_atoi(str[0] + 1);
 	else
 	{
 		ft_putstr_fd("exit: ", STDERR_FILENO);

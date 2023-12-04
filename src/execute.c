@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
 /*   Updated: 2023/12/04 16:30:46 by gabrrodr         ###   ########.fr       */
@@ -31,9 +31,9 @@ static int	dup_process(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[
 static int	check_fd_heredoc(t_prompt *prompt, t_simple_cmds *cmd, int end[2])
 {
 	int	fd_in;
-
 	if (prompt->heredoc->status)
 	{
+		
 		close(end[0]);
 		fd_in = open(cmd->hd_file_name, O_RDONLY);
 	}
@@ -82,6 +82,7 @@ static void pipewait(t_prompt *prompt, int *pid)
 	i = -1;
 	while (++i < n_pipes - 1)
 		waitpid(pid[i], &status, 0);
+	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		prompt->heredoc->status = WIFEXITED(status);
 }
