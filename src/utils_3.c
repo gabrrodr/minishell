@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:31:37 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 13:53:59 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:42:00 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 
 char    *get_word(char *str)
 {
-   char   *val;
-   int       i;
-   int       j;
-   int       start;
+	char	*val;
+	int		i;
+	int		j;
+	int		start;
 
-   i = 0;
-   while (str[i] && str[i] != '$')
-      i++;
-   i++;
-   start = i;
-   while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '\"')
-      i++;
-   val = ft_calloc(i - start + 1, sizeof(char));
-   j = 0;
-   while (start < i)
-      val[j++] = str[start++];
-   return (val);
+	i = 0;
+	while (str[i] && str[i] != '$')
+		i++;
+	i++;
+	start = i;
+	while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '\"' 
+		&& str[i] != '/' && str[i] != '$')
+    	i++;
+	val = ft_calloc(i - start + 1, sizeof(char));
+	j = 0;
+	while (start < i)
+    	val[j++] = str[start++];
+	return (val);
 }
 
 static void cat_str(char **str, char *result, size_t total_length)

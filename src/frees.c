@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 12:28:36 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:14:23 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_array(char **arr)
 	free(arr);
 }
 
-static void	free_parser(t_simple_cmds *simple_cmds)
+void	free_parser(t_simple_cmds *simple_cmds)
 {
 	t_simple_cmds	*tmp;
 	
