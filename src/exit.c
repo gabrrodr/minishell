@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 18:36:08 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:19:12 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,19 @@ int	ms_exit(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**str;
 	
-	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (!cmds)
 	{
 		free_data(prompt);
 		exit(g_code);
 	}
+	if (!cmds->prev)
+		ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmds->str[0] && cmds->str[1])
 	{
 		if (is_digit(cmds->str[0]))
 		{
-			ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
-			g_code = 127;
+			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+			g_code = 1;
 			return (g_code);
 		}
 	}

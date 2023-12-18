@@ -6,7 +6,7 @@
 #    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/11/30 16:18:26 by gabrrodr         ###   ########.fr        #
+#    Updated: 2023/12/06 12:53:14 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,5 +67,6 @@ clean:
 
 fclean: clean
 	@$(RM) $(LIBFT) $(NAME)
+	@$(RM) .tmp*
 	
 re: fclean all

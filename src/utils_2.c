@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 13:54:29 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:51:48 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,16 @@ static char    *replace(t_prompt *prompt, char *str)
 	if (!var)
 	{
 		free(word);
-		return (NULL);
+		final_str = ft_strdup("\n");
+		return (final_str);
 	}
-	final_str = create_str(prompt, str, var, word);
-	free(word);
-	free(var);
-	return (final_str);
+	else
+	{
+		final_str = create_str(prompt, str, var, word);
+		free(word);
+		free(var);
+		return (final_str);
+	}
 }
 
 static void    expand_word(t_prompt *prompt, char **word)
@@ -89,13 +93,13 @@ static void    expand_word(t_prompt *prompt, char **word)
    {
       if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word))
       {
-         tmp = replace(prompt, *word);
-         if (tmp)
-         {
-            free(*word);
+    	tmp = replace(prompt, *word);
+        if (tmp)
+        {
+        	free(*word);
             *word = ft_strdup(tmp);
             free(tmp);
-         }
+        }
       }
    }
    if (!is_expandable(*word) && is_exit_status(*word))
