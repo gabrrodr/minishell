@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:04:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 16:36:38 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:46:33 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ int	check_redirections(t_prompt *prompt)
 			{
 				g_code = 2;
 				return (error_redirections(tmp));
+			}
+			if (tmp->str && !ft_strncmp(tmp->str, "$", 1))
+			{
+				g_code = 1;
+				ft_putstr_fd("bash: ", STDERR_FILENO);
+				ft_putstr_fd(tmp->str, STDERR_FILENO);
+				ft_putendl_fd(": abiguous redirect", STDERR_FILENO);
+				return (EXIT_FAILURE);
 			}
 		}
 		tmp = tmp->next;

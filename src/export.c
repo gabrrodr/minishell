@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:27 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/16 17:40:02 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:04:16 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,46 @@ int	check_variable(t_prompt *prompt, char *new)
 	return (0);	
 }
 
+int is_identifier(char c)
+{
+    return (c == '|' || c == '<' || c == '>' || c == '[' || c == ']'
+       || c == '\'' || c == '\"' || c == ' ' || c == ',' || c == '.'
+       || c == ':' || c == '/' || c == '{' || c == '}' || c == '+'
+       || c == '^' || c == '%' || c == '#' || c == '@' || c == '!'
+       || c == '~' || c == '=' || c == '-' || c == '?' || c == '&'
+	   || c == '*');
+}
+
+int	export_errors(char *str)
+{
+	ft_putstr_fd("export: `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+	return (EXIT_FAILURE);
+}
+
+int	check_params(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str[0] || ft_isdigit(str[0]) || str[0] == '=')
+	{
+		export_errors(str);
+		return (1);
+	}
+	while (str[i] && str[i] != '=')
+	{
+		if (is_identifier(str[i]))
+		{
+			export_errors(str);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**env;
@@ -119,6 +159,8 @@ int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 	else
 		while (cmds->str[++i])
 		{
+			if (check_params(cmds->str[i]))
+				break;
 			if (check_equal(prompt, cmds, i) == 0)
 			{
 				tmp = ft_split(cmds->str[i], '=');

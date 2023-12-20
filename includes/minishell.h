@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 16:36:17 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:26:39 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ char	**dupe_arr(char **arr);
 void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 void	free_parser(t_simple_cmds *simple_cmds);
-void	free_lexer(t_lexer *lst);
-
 
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
@@ -148,6 +146,7 @@ void	sub_value(t_prompt *prompt, t_simple_cmds *cmds, int i);
 int		check_variable(t_prompt *prompt, char *new);
 int		check_key(t_prompt *prompt, t_simple_cmds *cmds, int i);
 char	**sort_export(t_prompt *prompt);
+int		is_identifier(char c);
 
 //signals
 void	set_sign(void);
@@ -161,7 +160,6 @@ int		equal_sign(char *str);
 int		dol_sign(char *str);
 char	*str_expander(t_prompt *prompt, char *str);
 char 	**single_cmd_expander(t_prompt *prompt, char **str);
-bool    solo_doll_sign(const char *str);
 
 //error
 int ms_error(int error);

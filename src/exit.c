@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/06 12:19:12 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:14:07 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,10 @@ static void	exit_code(char **str)
 
 	if (!str[0])
 		exit_code = 0;
-	else if (str[0][0] == '#')
-		exit_code = g_code;
 	else if(is_digit(str[0]))
 		exit_code = ft_atoi(str[0]);
 	else if (str[0][0] == '-' && is_digit(str[0] + 1))
 		exit_code = 256 - ft_atoi(str[0] + 1);
-	else if (str[0][0] == '+'  && is_digit(str[0] + 1))
-		exit_code = ft_atoi(str[0] + 1);
 	else
 	{
 		ft_putstr_fd("exit: ", STDERR_FILENO);
@@ -57,19 +53,18 @@ int	ms_exit(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**str;
 	
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (!cmds)
 	{
 		free_data(prompt);
 		exit(g_code);
 	}
-	if (!cmds->prev)
-		ft_putendl_fd("exit", STDOUT_FILENO);
 	if (cmds->str[0] && cmds->str[1])
 	{
 		if (is_digit(cmds->str[0]))
 		{
-			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-			g_code = 1;
+			ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
+			g_code = 127;
 			return (g_code);
 		}
 	}
