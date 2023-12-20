@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/04 16:30:46 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:47:57 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void pipewait(t_prompt *prompt, int *pid)
 	i = -1;
 	while (++i < n_pipes - 1)
 		waitpid(pid[i], &status, 0);
+	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		prompt->heredoc->status = WIFEXITED(status);
 }
