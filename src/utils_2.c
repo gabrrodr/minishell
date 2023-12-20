@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/06 13:57:52 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:32:42 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,17 @@ static char    *replace(t_prompt *prompt, char *str)
 	if (!var)
 	{
 		free(word);
+		final_str = ft_strdup("\n");
+		return (final_str);
+	}
+	else
+	{
+		final_str = create_str(prompt, str, var, word);
+		free(word);
+		free(var);
+		return (final_str);
 		return (NULL);
 	}
-	final_str = create_str(prompt, str, var, word);
-	free(word);
-	free(var);
-	return (final_str);
 }
 
 static void    expand_word(t_prompt *prompt, char **word)
@@ -87,7 +92,7 @@ static void    expand_word(t_prompt *prompt, char **word)
    j = -1;
    while ((*word)[++j])
    {
-		if ((*word)[j] == '$' && is_expandable(*word))
+		if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word))
     	{
         	tmp = replace(prompt, *word);
         	if (tmp)
