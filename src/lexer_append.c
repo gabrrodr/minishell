@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:55:45 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 17:10:30 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:50:21 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i)
 	t_lexer	*tok;
 
 	tmp = *str;
+	tok = NULL;
 	while (tmp[i] && !ft_is_separator(tmp + i))
 	{
 		if (ft_is_quote(tmp[i]))

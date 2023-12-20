@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/07 18:51:48 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:32:42 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static char    *replace(t_prompt *prompt, char *str)
 		free(word);
 		free(var);
 		return (final_str);
+		return (NULL);
 	}
 }
 
@@ -91,19 +92,26 @@ static void    expand_word(t_prompt *prompt, char **word)
    j = -1;
    while ((*word)[++j])
    {
-      if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word))
-      {
-    	tmp = replace(prompt, *word);
-        if (tmp)
-        {
-        	free(*word);
-            *word = ft_strdup(tmp);
-            free(tmp);
-        }
-      }
+		if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word))
+    	{
+        	tmp = replace(prompt, *word);
+        	if (tmp)
+        	{
+        	   free(*word);
+        	   *word = ft_strdup(tmp);
+        	   free(tmp);
+        	}
+    	}
    }
    if (!is_expandable(*word) && is_exit_status(*word))
 	  prompt->exit_codes[prompt->flg[2]++] = 0;
+}
+
+int	rdc_case(char *str)
+{
+	if (!ft_strncmp(str, "<<", 2))
+		return (1);
+	return (0);
 }
 
 char   *expand_input(t_prompt *prompt, char *input)
@@ -121,7 +129,10 @@ char   *expand_input(t_prompt *prompt, char *input)
 	i = 0;
 	while (arr[i])
 	{
-		expand_word(prompt, &arr[i]);
+		if (rdc_case(arr[i]))
+			i++;
+		else
+			expand_word(prompt, &arr[i]);
 		i++;
 	}
 	return (array_to_str(arr));

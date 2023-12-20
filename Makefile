@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
+#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2023/12/06 12:53:14 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/12/20 12:13:28 by gabrrodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,5 +68,5 @@ clean:
 fclean: clean
 	@$(RM) $(LIBFT) $(NAME)
 	@$(RM) .tmp*
-	
+
 re: fclean all

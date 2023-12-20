@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:43 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/07 13:17:30 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:16:36 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,3 @@ int	ms_cd(t_prompt *tools, t_simple_cmds *simple_cmd)
 	add_path_to_env(tools);
 	return (ret);
 }
-

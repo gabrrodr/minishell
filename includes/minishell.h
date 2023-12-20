@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 16:36:17 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:15:21 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	free_data(t_prompt *prompt);
 void	free_parser(t_simple_cmds *simple_cmds);
 void	free_lexer(t_lexer *lst);
 
-
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node);
@@ -148,6 +147,7 @@ void	sub_value(t_prompt *prompt, t_simple_cmds *cmds, int i);
 int		check_variable(t_prompt *prompt, char *new);
 int		check_key(t_prompt *prompt, t_simple_cmds *cmds, int i);
 char	**sort_export(t_prompt *prompt);
+int		is_identifier(char c);
 
 //signals
 void	set_sign(void);

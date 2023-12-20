@@ -6,8 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:52:05 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/04 16:16:45 by gabrrodr         ###   ########.fr       */
-/*   Updated: 2023/11/30 12:43:42 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:04:59 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +35,7 @@ t_lexer	*ft_handle_tokenize(char *str)
 	
 	error = 0;
 	lexer_tok = NULL;
-	while (str && *str)
+	while (*str)
 	{	
 		if (error)
 			return (ft_clear_lexer(&lexer_tok), NULL);
