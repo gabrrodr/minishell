@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:17:23 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/04 14:27:34 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:55:26 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static char	*set_file_name(void)
 	return (file_name);
 }
 
-static int	heredoc(t_prompt *prompt, t_lexer *redirect, bool quote, char *file_name)
+static int	heredoc(t_prompt *prompt, t_lexer *redirect, 
+	bool quote, char *file_name)
 {
 	int		fd;
 	char	*line;
@@ -54,9 +55,11 @@ static int	check_heredoc(t_prompt *prompt, t_lexer *redirect, char *file_name)
 {
 	int		hd;
 	bool	quote;
-	
-	if ((redirect->str[0] == '\"' && redirect->str[ft_strlen(redirect->str) - 1] == '\"')
-		|| (redirect->str[0] == '\'' && redirect->str[ft_strlen(redirect->str) - 1] == '\''))
+
+	if ((redirect->str[0] == '\"' && 
+			redirect->str[ft_strlen(redirect->str) - 1] == '\"')
+		|| (redirect->str[0] == '\'' && 
+			redirect->str[ft_strlen(redirect->str) - 1] == '\''))
 	{
 		quote = true;
 	}
@@ -71,8 +74,8 @@ static int	check_heredoc(t_prompt *prompt, t_lexer *redirect, char *file_name)
 
 int	send_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 {
-	t_lexer *redirect;
-	
+	t_lexer	*redirect;
+
 	redirect = cmds->redirect;
 	while (redirect)
 	{
@@ -95,13 +98,14 @@ int	send_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 t_simple_cmds	*single_cmd_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	t_lexer			*redirect;
+	(void)prompt;
 
-	cmds->str = single_cmd_expander(prompt, cmds->str);
+	//cmds->str = single_cmd_expander(prompt, cmds->str);
 	redirect = cmds->redirect;
 	while (cmds->redirect)
 	{
-		if (cmds->redirect->token == LESS_LESS)
-			cmds->redirect->str = str_expander(prompt, cmds->redirect->str);
+		/*if (cmds->redirect->token == LESS_LESS)
+			cmds->redirect->str = str_expander(prompt, cmds->redirect->str);*/
 		if (cmds->redirect->next == NULL)
 			break ;
 		cmds->redirect = cmds->redirect->next;

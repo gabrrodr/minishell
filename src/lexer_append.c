@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_append.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:55:45 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/03 17:10:30 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:29:46 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i)
 	char	*value;
 	t_lexer	*tok;
 
+	tok = NULL;
 	tmp = *str;
 	while (tmp[i] && !ft_is_separator(tmp + i))
 	{

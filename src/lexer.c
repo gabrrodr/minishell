@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 12:52:05 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/04 16:16:45 by gabrrodr         ###   ########.fr       */
-/*   Updated: 2023/11/30 12:43:42 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:41:29 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +31,12 @@ int	ft_handle_separator(char **line_ptr, t_lexer **token_list)
 t_lexer	*ft_handle_tokenize(char *str)
 {
 	t_lexer	*lexer_tok;
-	int	error;
-	
+	int		error;
+
 	error = 0;
 	lexer_tok = NULL;
 	while (str && *str)
-	{	
+	{
 		if (error)
 			return (ft_clear_lexer(&lexer_tok), NULL);
 		if (ft_isspace(*str))
@@ -45,20 +44,19 @@ t_lexer	*ft_handle_tokenize(char *str)
 			ft_skip_spaces(&str);
 		}
 		else if (!ft_strncmp(str, "<", 1) || !ft_strncmp(str, ">", 1)
-				|| !ft_strncmp(str, "|", 1))
-				error = (!ft_handle_separator(&str, &lexer_tok) && 1);
+			|| !ft_strncmp(str, "|", 1))
+			error = (!ft_handle_separator(&str, &lexer_tok) && 1);
 		else 
-				error = (!ft_append_identifier(&str, &lexer_tok, 0) && 1);
+			error = (!ft_append_identifier(&str, &lexer_tok, 0) && 1);
 	}
-	return(lexer_tok);
+	return (lexer_tok);
 }
 
 t_lexer	*lexer(char *input)
 {
 	t_lexer	*lexer_tok;
-	
-	lexer_tok = ft_handle_tokenize(input);
 
+	lexer_tok = ft_handle_tokenize(input);
 	free(input);
 	return (lexer_tok);
 }

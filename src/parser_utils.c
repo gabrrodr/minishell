@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:47:16 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/04 16:49:41 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:45:07 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_builtin(char *str)
 int	nbr_nodes(t_lexer *lexer)
 {
 	int		i;
-	t_lexer *tmp;
+	t_lexer	*tmp;
 
 	i = 0;
 	tmp = lexer;

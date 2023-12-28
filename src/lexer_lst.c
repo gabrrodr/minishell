@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:42:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/03 16:12:45 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:39:35 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_lexer	*ms_lstlast(t_lexer *lst)
 
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
 {
-	t_lexer *node;
+	t_lexer	*node;
 
 	node = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!node)
@@ -40,7 +40,7 @@ t_lexer	*ft_lexernew(char *str, t_tokens tokenType)
 void	ft_lexeradd_back(t_lexer **lst, t_lexer *node)
 {
 	t_lexer	*tmp;
-	
+
 	tmp = *lst;
 	if (!node)
 		return ;

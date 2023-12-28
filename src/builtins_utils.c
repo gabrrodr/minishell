@@ -6,18 +6,18 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:38:54 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/27 14:29:39 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:57:50 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int g_code;
+extern int	g_code;
 
 static void	print_exit_status(char *str)
 {
-	char *tmp;
-	int	i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	while (str[i] && str[i] != '$')
@@ -30,14 +30,13 @@ static void	print_exit_status(char *str)
 		write(STDOUT_FILENO, &str[i++], 1);
 }
 
-
 void	print_args(t_prompt *prompt, char **args, int i)
 {
 	while (args[i]) 
 	{
 		if (is_exit_status(args[i]))
 		{
-			if (prompt->exit_codes[current_exit_status(prompt)] == 1)
+			if (prompt->exit_codes[current_exit_status(prompt)] == 0)
 				print_exit_status(args[i]);
 			else
 				ft_putstr_fd(args[i], STDOUT_FILENO);
@@ -53,12 +52,12 @@ void	print_args(t_prompt *prompt, char **args, int i)
 
 void	print_new_directory(t_prompt *tools)
 {
-    char *oldpwd;
-	
+	char	*oldpwd;
+
 	oldpwd = find_path_ret("OLDPWD=", tools);
-    if (oldpwd)
-    {
-        ft_putendl_fd(oldpwd, STDOUT_FILENO);
-        free(oldpwd);
-    }
+	if (oldpwd)
+	{
+		ft_putendl_fd(oldpwd, STDOUT_FILENO);
+		free(oldpwd);
+	}
 }

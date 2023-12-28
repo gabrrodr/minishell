@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:05:23 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/11/24 16:28:33 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:08:54 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_code;
 
-int ms_error(int error)
+int	ms_error(int error)
 {
 	g_code = error;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);

@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/06 13:37:34 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:11:34 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 extern int	g_code;
 
-static int	dup_process(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[2])
+static int	dup_process(t_prompt *prompt, t_simple_cmds *cmd, 
+	int fd_in, int end[2])
 {
 	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
 		return (1);
@@ -31,9 +32,9 @@ static int	dup_process(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[
 static int	check_fd_heredoc(t_prompt *prompt, t_simple_cmds *cmd, int end[2])
 {
 	int	fd_in;
+
 	if (prompt->heredoc->status)
 	{
-		
 		close(end[0]);
 		fd_in = open(cmd->hd_file_name, O_RDONLY);
 	}
@@ -45,7 +46,7 @@ static int	check_fd_heredoc(t_prompt *prompt, t_simple_cmds *cmd, int end[2])
 static int	ft_fork(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[2])
 {
 	static int	i;
-	
+
 	if (!i)
 		i = 0;
 	if (prompt->reset == true)
@@ -56,7 +57,7 @@ static int	ft_fork(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[2])
 	prompt->pid[i] = fork();
 	if (prompt->pid[i] < 0)
 		return (ms_error(5));
-	if(prompt->pid[i] == 0)
+	if (prompt->pid[i] == 0)
 	{
 		if (dup_process(prompt, cmd, fd_in, end))
 			return (ms_error(4));
@@ -65,13 +66,13 @@ static int	ft_fork(t_prompt *prompt, t_simple_cmds *cmd, int fd_in, int end[2])
 	return (0);
 }
 
-static void pipewait(t_prompt *prompt, int *pid)
+static void	pipewait(t_prompt *prompt, int *pid)
 {
 	t_simple_cmds	*process;
-	int	i;
-	int	status;
-	int	n_pipes;
-	
+	int				i;
+	int				status;
+	int				n_pipes;
+
 	n_pipes = 0;
 	process = prompt->simple_cmds;
 	while (process)
@@ -84,7 +85,10 @@ static void pipewait(t_prompt *prompt, int *pid)
 		waitpid(pid[i], &status, 0);
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
-		prompt->heredoc->status = WIFEXITED(status);
+	{
+		prompt->heredoc->status = WEXITSTATUS(status);
+		g_code = WEXITSTATUS(status);
+	}
 }
 
 int	execute(t_prompt *prompt)
@@ -92,11 +96,11 @@ int	execute(t_prompt *prompt)
 	t_simple_cmds	*cmd;
 	int				fd_in;
 	int				end[2];
-	
+
 	cmd = prompt->simple_cmds;
 	fd_in = STDIN_FILENO;
 	if (!cmd->next)
-		return(single_cmd(prompt, cmd));
+		return (single_cmd(prompt, cmd));
 	while (cmd)
 	{
 		if (cmd->next)

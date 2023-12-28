@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:23:12 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/04 14:38:36 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 13:11:45 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	var_len_after_dol(char *str, int j)
 
 static int	replace_var(t_prompt *prompt, char *str, char **tmp, int i)
 {
-	int	j;
-	int	len;
+	int		j;
+	int		len;
 	char	*tmp2;
 	char	*tmp3;
 
@@ -35,7 +35,8 @@ static int	replace_var(t_prompt *prompt, char *str, char **tmp, int i)
 	len = 0;
 	while (prompt->env[++j])
 	{
-		if (!ft_strncmp(str + i + 1, prompt->env[j], equal_sign(prompt->env[j]) - 1)
+		if (!ft_strncmp(str + i + 1, prompt->env[j], 
+				equal_sign(prompt->env[j]) - 1) 
 			&& var_len_after_dol(str, i) == equal_sign(prompt->env[j]))
 		{
 			tmp2 = ft_strdup(prompt->env[j] + equal_sign(prompt->env[j]));
@@ -47,7 +48,7 @@ static int	replace_var(t_prompt *prompt, char *str, char **tmp, int i)
 		}
 	}
 	if (len == 0)
-			len = var_len_after_dol(str, i) - i;
+		len = var_len_after_dol(str, i) - i;
 	return (len);
 }
 
@@ -84,8 +85,7 @@ char	*str_expander(t_prompt *prompt, char *str)
 	char	*tmp;
 
 	tmp = NULL;
-
-	if (str[dol_sign(str) - 2] != '\''  && dol_sign(str) != 0 
+	if (str[dol_sign(str) - 2] != '\'' && dol_sign(str) != 0 
 		&& str[dol_sign(str)] != '\0')
 	{
 		tmp = expand(prompt, str);
@@ -97,7 +97,7 @@ char	*str_expander(t_prompt *prompt, char *str)
 	return (str);
 }
 
-char **single_cmd_expander(t_prompt *prompt, char **str)
+char	**single_cmd_expander(t_prompt *prompt, char **str)
 {
 	char	*tmp;
 	int		i;
@@ -111,14 +111,13 @@ char **single_cmd_expander(t_prompt *prompt, char **str)
 		str[0] = ft_strdup("");
 		return (str);
 	}
-	while(*str && str[++i] && str[i][0] != '\0')
+	while (*str && str[++i] && str[i][0] != '\0')
 	{
 		j = dol_sign(str[i]);
 		if (dol_sign(str[i]) && (j > 0 && j - 2 >= 0
 				&& str[i][dol_sign(str[i]) - 2] != '\'')
 			&& dol_sign(str[i]) != 0 && str[i][dol_sign(str[i])] != '\0')
 		{
-			
 			tmp = expand(prompt, str[i]);
 			free(str[i]);
 			str[i] = tmp;

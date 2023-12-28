@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:02:28 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/04 13:53:38 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:50:38 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static int	handle_infile(char *str)
 int	setup_redirect(t_simple_cmds *cmd)
 {
 	t_lexer	*redirect;
-	
+
 	redirect = cmd->redirect;
 	while (redirect)
 	{
 		if (redirect->token == LESS)
 		{
-				if (handle_infile(redirect->str))
-					return (1);
+			if (handle_infile(redirect->str))
+				return (1);
 		}
 		else if (redirect->token == LESS_LESS)
 		{
@@ -60,7 +60,7 @@ int	setup_redirect(t_simple_cmds *cmd)
 				return (1);
 		}
 		else if (redirect->token == GREAT 
-				|| redirect->token == GREAT_GREAT)
+			|| redirect->token == GREAT_GREAT)
 		{
 			if (handle_outfile(redirect))
 				return (1);

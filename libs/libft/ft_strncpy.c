@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_codes.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 13:56:29 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 12:11:52 by mcarneir         ###   ########.fr       */
+/*   Created: 2023/12/20 12:28:29 by mcarneir          #+#    #+#             */
+/*   Updated: 2023/12/28 17:44:06 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-bool	is_exit_status(char *str)
+size_t	ft_strncpy(char *dst, const char *src, size_t size)
 {
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-			if (str[i + 1] && str[i + 1] == '?')
-				return (true);
-	}
-	return (false);
-}
-
-int	current_exit_status(t_prompt *prompt)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (prompt->exit_codes[i] == 2)
+	while (i < size && src[i])
+	{
+		dst[i] = src[i];
 		i++;
+	}
+	while (i < size)
+		dst[i++] = '\0';
 	return (i);
 }

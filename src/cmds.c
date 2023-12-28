@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/07 16:51:26 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:08:00 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	system_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	char	*sub_path;
 	char	**path;
 	int		i;
-	
+
 	if (!access(cmds->str[0], F_OK))
 		execve(cmds->str[0], cmds->str, prompt->env);
 	path = get_path(prompt);
@@ -68,7 +68,7 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	}
 	else if (!ft_strncmp(cmds->str[0], "$?", 3))
 	{
-		if (prompt->exit_codes[current_exit_status(prompt)] == 1)
+		if (prompt->exit_codes[current_exit_status(prompt)] == 0)
 			g_code = if_question_mark();
 		else
 			g_code = system_cmd(prompt, cmds);

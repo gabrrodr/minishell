@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/30 16:37:17 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:47:09 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	redirections(t_prompt *prompt, t_simple_cmds *cmds)
 		if (!cmds->redirect)
 			cmds->redirect = ft_lexernew(NULL, prompt->lexer->token);
 		else
-			ft_lexeradd_back(&cmds->redirect, ft_lexernew(NULL, prompt->lexer->token));
+			ft_lexeradd_back(&cmds->redirect, 
+				ft_lexernew(NULL, prompt->lexer->token));
 		prompt->lexer = prompt->lexer->next;
 		if (prompt->lexer && prompt->lexer->str)
 		{
@@ -36,7 +37,7 @@ void	redirections(t_prompt *prompt, t_simple_cmds *cmds)
 void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	int		size;
-	
+
 	size = nbr_nodes(prompt->lexer);
 	if (!cmds->str)
 		alloc_double_array(size, cmds);
@@ -52,7 +53,7 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 			{
 				cmds->str[prompt->flg[3]] = ft_strdup(prompt->lexer->str);
 				prompt->flg[3]++;
-			}	
+			}
 		}
 		if (prompt->lexer && prompt->lexer->token == PIPE)
 			return ;
@@ -62,17 +63,16 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 
 void	get_simple_cmds(t_prompt *prompt, int pipes)
 {
-	t_lexer	*lexer_tmp;
+	t_lexer			*lexer_tmp;
 	t_simple_cmds	*cmds;
 	t_simple_cmds	*cmds_tmp;
-	
+
 	lexer_tmp = prompt->lexer;
 	cmds = prompt->simple_cmds;
 	while (prompt->lexer && pipes >= 0)
 	{
 		if (prompt->lexer->token && prompt->lexer->token == PIPE)
-		{		
-			
+		{
 			prompt->lexer = prompt->lexer->next;
 			pipes--;
 			prompt->flg[3] = 0;
@@ -83,7 +83,7 @@ void	get_simple_cmds(t_prompt *prompt, int pipes)
 		}
 		redirections(prompt, cmds);
 		if (prompt->lexer && prompt->lexer->token == PIPE)
-			continue;
+			continue ;
 		process_tokens(prompt, cmds);
 	}
 	prompt->lexer = lexer_tmp;

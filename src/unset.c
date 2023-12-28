@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:05:56 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/23 12:29:13 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 13:12:54 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	unset_errors(t_simple_cmds *cmds)
 int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**tmp;
-	
+
 	if (unset_errors(cmds) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	else
