@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:43 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/20 12:16:36 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:14:25 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	add_path_to_env(t_prompt *tools)
 			tools->env[i] = tmp;
 		}
 		else if (!ft_strncmp(tools->env[i], "OLDPWD=", 7) 
-				&& tools->oldpwd)
+			&& tools->oldpwd)
 		{
 			tmp = ft_strjoin("OLDPWD=", tools->oldpwd);
 			free(tools->env[i]);
@@ -85,19 +85,20 @@ int	ms_cd(t_prompt *tools, t_simple_cmds *simple_cmd)
 {
 	int		ret;
 
-	if (!simple_cmd->str[0])
+	if (!simple_cmd->str[0] || !ft_strncmp(simple_cmd->str[0], "--", 2) 
+		|| !ft_strncmp(simple_cmd->str[0], "~", 1))
 		ret = specific_path(tools, "HOME=");
 	else if (ft_strncmp(simple_cmd->str[0], "-", 1) == 0)
 	{
-        ret = specific_path(tools, "OLDPWD=");
-        if (ret == 0)
+		ret = specific_path(tools, "OLDPWD=");
+		if (ret == 0)
 			print_new_directory(tools);
 	}
 	else if (simple_cmd->str[1] != NULL)
-    {
-        ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
-        return (1);
-    }
+	{
+		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
+		return (1);
+	}
 	else
 	{
 		ret = chdir(simple_cmd->str[0]);

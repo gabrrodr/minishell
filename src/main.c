@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/20 12:23:09 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:46:45 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ static void dev_mod(t_prompt *prompt)
    //exit(1);
 }
 
-
-static void	end_program(char *input, t_prompt *prompt)
+/*static void	end_program(char *input, t_prompt *prompt)
 {
 	free(input);
 	free_data(prompt);
 	rl_clear_history();
-}
+}*/
 
 static t_prompt	*start_program(int argc, char **argv, char **env)
 {
@@ -89,7 +88,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_prompt	*prompt;
 	char		*input;
-	
+
 	prompt = start_program(argc, argv, env);
 	while (prompt)
 	{
@@ -103,13 +102,13 @@ int	main(int argc, char **argv, char **env)
 		}
 		add_history(input);
 		if (!input || !input[0])
-			continue;
+			continue ;
 		input = expand_input(prompt, input);
 		prompt->lexer = lexer(input);
-		if (!prompt->lexer)
+		if (!prompt->lexer && !check_redirections(prompt))
 		{
 			prompt = reset_prompt(prompt, argv, env);
-			continue;
+			continue ;
 		}
 		if (prompt->lexer && !check_redirections(prompt))
 		{
@@ -120,5 +119,4 @@ int	main(int argc, char **argv, char **env)
 		}
 		prompt = reset_prompt(prompt, argv, env);
 	}
-	end_program(input, prompt);
 }

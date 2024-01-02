@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/20 12:15:21 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:29:33 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ void	print_new_directory(t_prompt *tools);
 char	*find_path_ret(char *str, t_prompt *tools);
 void	init_exit_codes(t_prompt *prompt, char *input);
 int		if_question_mark(void);
-
+char	*replace(t_prompt *prompt, char *str);
+bool	is_expandable(char *str);
 
 //void	replace_variables(t_prompt *prompt);
 char		*expand_input(t_prompt *prompt, char *input);
@@ -146,8 +147,11 @@ int		check_equal(t_prompt *prompt, t_simple_cmds *cmds, int i);
 void	sub_value(t_prompt *prompt, t_simple_cmds *cmds, int i);
 int		check_variable(t_prompt *prompt, char *new);
 int		check_key(t_prompt *prompt, t_simple_cmds *cmds, int i);
+void	print_export(char **env);
 char	**sort_export(t_prompt *prompt);
 int		is_identifier(char c);
+int		export_errors(char *str);
+int		check_params(char *str);
 
 //signals
 void	set_sign(void);

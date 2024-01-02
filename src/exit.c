@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/20 12:44:11 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:14:22 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ int	is_digit(char *str)
 
 static void	exit_code(char **str)
 {
-	int exit_code;
+	int	exit_code;
 
 	if (!str[0])
 		exit_code = 0;
 	else if (str[0][0] == '#')
 		exit_code = g_code;
-	else if(is_digit(str[0]))
+	else if (is_digit(str[0]))
 		exit_code = ft_atoi(str[0]);
 	else if (str[0][0] == '-' && is_digit(str[0] + 1))
 		exit_code = 256 - ft_atoi(str[0] + 1);
-	else if (str[0][0] == '+'  && is_digit(str[0] + 1))
+	else if (str[0][0] == '+' && is_digit(str[0] + 1))
 		exit_code = ft_atoi(str[0] + 1);
 	else
 	{
@@ -57,7 +57,6 @@ int	ms_exit(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**str;
 	
-	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (!cmds)
 	{
 		free_data(prompt);

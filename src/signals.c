@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:45:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/27 17:02:17 by mcarneir         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:51:00 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern int	g_code;
 void	execute_signal(int sig, void *prompt)
 {
 	static t_prompt	*static_prompt;
-	
+
 	if (!static_prompt && prompt)
 		static_prompt = (t_prompt *)prompt;
 	if (static_prompt && static_prompt->interact)

@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:27 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/07 16:04:16 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:16:06 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	print_export(char **env)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (env[++i])
-	{
-		j = 0;
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		while (env[i][j] != '=' && env[i][j])
-		{
-			ft_putchar_fd(env[i][j], STDOUT_FILENO);
-			j++;
-			if (env[i][j] == '=')
-			{
-				ft_putstr_fd("=\"", STDOUT_FILENO);
-				j++;
-				while (env[i][j])
-					ft_putchar_fd(env[i][j++], STDOUT_FILENO);
-				ft_putchar_fd('"', STDOUT_FILENO);
-			}
-		}
-		ft_putchar_fd('\n', STDOUT_FILENO);
-	}
-}
 
 char	**add_single(char **env, char *key)
 {
@@ -68,7 +41,7 @@ char	**add_env(char **env, char *key, char *value)
 	char	*tmp;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	j = 0;
 	while (env[i])
@@ -88,64 +61,6 @@ char	**add_env(char **env, char *key, char *value)
 	return (new_env);
 }
 
-int	check_variable(t_prompt *prompt, char *new)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (new[j] != '=' && new[j])
-		j++;
-	while (prompt->env[i])
-	{
-		if (ft_strncmp(prompt->env[i], new, j) == 0)
-			return (1);
-		i++;
-	}
-	return (0);	
-}
-
-int is_identifier(char c)
-{
-    return (c == '|' || c == '<' || c == '>' || c == '[' || c == ']'
-       || c == '\'' || c == '\"' || c == ' ' || c == ',' || c == '.'
-       || c == ':' || c == '/' || c == '{' || c == '}' || c == '+'
-       || c == '^' || c == '%' || c == '#' || c == '@' || c == '!'
-       || c == '~' || c == '=' || c == '-' || c == '?' || c == '&'
-	   || c == '*');
-}
-
-int	export_errors(char *str)
-{
-	ft_putstr_fd("export: `", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
-	return (EXIT_FAILURE);
-}
-
-int	check_params(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str[0] || ft_isdigit(str[0]) || str[0] == '=')
-	{
-		export_errors(str);
-		return (1);
-	}
-	while (str[i] && str[i] != '=')
-	{
-		if (is_identifier(str[i]))
-		{
-			export_errors(str);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
 int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**env;
@@ -157,10 +72,11 @@ int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 	if (!cmds->str[0])
 		print_export(env);
 	else
+	{
 		while (cmds->str[++i])
 		{
 			if (check_params(cmds->str[i]))
-				break;
+				break ;
 			if (check_equal(prompt, cmds, i) == 0)
 			{
 				tmp = ft_split(cmds->str[i], '=');
@@ -177,5 +93,6 @@ int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 			else
 				prompt->env = add_single(prompt->env, cmds->str[i]);
 		}
+	}
 	return (EXIT_SUCCESS);
 }

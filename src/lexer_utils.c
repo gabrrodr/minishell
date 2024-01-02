@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:25:54 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/19 15:40:08 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:30:03 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool	ft_skip_quotes(char *line, size_t *i)
 	return (false);
 }
 
-void	ft_print_q_err(char	c)
+void	ft_print_q_err(char c)
 {
 	ft_putstr_fd("minishell: unexpected EOF while looking for matching `", 2);
 	ft_putchar_fd(c, 2);

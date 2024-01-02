@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:17:23 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/06 15:39:24 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:55:26 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static char	*set_file_name(void)
 	return (file_name);
 }
 
-static int	heredoc(t_prompt *prompt, t_lexer *redirect, bool quote, char *file_name)
+static int	heredoc(t_prompt *prompt, t_lexer *redirect, 
+	bool quote, char *file_name)
 {
 	int		fd;
 	char	*line;
@@ -54,9 +55,11 @@ static int	check_heredoc(t_prompt *prompt, t_lexer *redirect, char *file_name)
 {
 	int		hd;
 	bool	quote;
-	
-	if ((redirect->str[0] == '\"' && redirect->str[ft_strlen(redirect->str) - 1] == '\"')
-		|| (redirect->str[0] == '\'' && redirect->str[ft_strlen(redirect->str) - 1] == '\''))
+
+	if ((redirect->str[0] == '\"' && 
+			redirect->str[ft_strlen(redirect->str) - 1] == '\"')
+		|| (redirect->str[0] == '\'' && 
+			redirect->str[ft_strlen(redirect->str) - 1] == '\''))
 	{
 		quote = true;
 	}
@@ -71,8 +74,8 @@ static int	check_heredoc(t_prompt *prompt, t_lexer *redirect, char *file_name)
 
 int	send_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 {
-	t_lexer *redirect;
-	
+	t_lexer	*redirect;
+
 	redirect = cmds->redirect;
 	while (redirect)
 	{

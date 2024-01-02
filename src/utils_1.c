@@ -6,39 +6,39 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/13 15:20:26 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 13:14:06 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char    *get_env(t_prompt *prompt, char *val)
+char	*get_env(t_prompt *prompt, char *val)
 {
-   int       i[3];
+	int	i[3];
 
-   if (!val)
-      return (NULL);
-   i[0] = -1;
-   while (prompt->env[++i[0]])
-   {
-      if (!ft_strncmp(val, prompt->env[i[0]], ft_strlen(val)))
-      {
-         free(val);
-         i[1] = 0;
-         while (prompt->env[i[0]][i[1]] != '=')
-            i[1]++;
-         val = ft_calloc(ft_strlen(prompt->env[i[0]]) - i[1] + 1,
-               sizeof(char));
-         if (!val)
-            return (NULL);
-         i[2] = -1;
-         while (prompt->env[i[0]][i[1]])
-            val[++i[2]] = prompt->env[i[0]][++i[1]];
-         return (val);
-      }
-   }
-   free(val);
-   return (NULL);
+	if (!val)
+		return (NULL);
+	i[0] = -1;
+	while (prompt->env[++i[0]])
+	{
+		if (!ft_strncmp(val, prompt->env[i[0]], ft_strlen(val)))
+		{
+			free(val);
+			i[1] = 0;
+			while (prompt->env[i[0]][i[1]] != '=')
+				i[1]++;
+			val = ft_calloc(ft_strlen(prompt->env[i[0]]) - i[1] + 1,
+					sizeof(char));
+			if (!val)
+				return (NULL);
+			i[2] = -1;
+			while (prompt->env[i[0]][i[1]])
+				val[++i[2]] = prompt->env[i[0]][++i[1]];
+			return (val);
+		}
+	}
+	free(val);
+	return (NULL);
 }
 
 int	ft_is_double_quotes(char c)

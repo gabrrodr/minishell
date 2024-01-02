@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_expander_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:37:10 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/04 14:31:53 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:51:44 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*char_to_str(char c)
 	return (str);
 }
 
-int equal_sign(char *str)
+int	equal_sign(char *str)
 {
 	int	i;
 
@@ -76,4 +76,3 @@ int	dol_sign(char *str)
 	}
 	return (0);
 }
-

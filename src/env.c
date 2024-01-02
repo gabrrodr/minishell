@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:54:20 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/11/22 15:59:21 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:08:38 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ char	*ms_getenv(char **env, char *var)
 	}
 	return (NULL);
 }
+
 char	**extend_env(char **env, char *new)
 {
 	char	**new_env;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	while (env[i])
 		i++;

@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_codes.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 13:56:29 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 12:11:52 by mcarneir         ###   ########.fr       */
+/*   Created: 2023/12/21 17:41:24 by mcarneir          #+#    #+#             */
+/*   Updated: 2023/12/28 17:50:51 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-bool	is_exit_status(char *str)
+const char	*ft_strstr(const char *str, const char *to_find)
 {
 	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-			if (str[i + 1] && str[i + 1] == '?')
-				return (true);
-	}
-	return (false);
-}
-
-int	current_exit_status(t_prompt *prompt)
-{
-	int	i;
+	int	j;
 
 	i = 0;
-	while (prompt->exit_codes[i] == 2)
-		i++;
-	return (i);
+	if (to_find[0] == '\0')
+		return (str);
+	while (str[i] != '\0')
+	{
+		j = 0;
+		while (str[i + j] != '\0' && str[i + j] == to_find[j])
+		{
+			if (to_find[j + 1] == '\0')
+				return (&str[i]);
+			++j;
+		}
+		++i;
+	}
+	return (0);
 }

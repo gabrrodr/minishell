@@ -6,7 +6,7 @@
 #    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/17 16:00:32 by mcarneir          #+#    #+#              #
-#    Updated: 2023/10/26 15:04:10 by mcarneir         ###   ########.fr        #
+#    Updated: 2023/12/21 17:43:50 by mcarneir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,10 @@ SRC =   ft_atoi.c \
         ft_strlen.c \
         ft_strmapi.c \
         ft_strncmp.c \
+		ft_strncpy.c \
         ft_strnstr.c \
         ft_strrchr.c \
+		ft_strstr.c \
         ft_strtrim.c \
         ft_substr.c \
         ft_tolower.c \
