@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:31:37 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/12/28 16:45:14 by mcarneir         ###   ########.fr       */
@@ -14,10 +14,10 @@
 
 char	*get_word(char *str)
 {
-	char	*val;
-	int		i;
-	int		j;
-	int		start;
+   char   *val;
+   int       i;
+   int       j;
+   int       start;
 
 	i = 0;
 	while (str[i] && str[i] != '$')

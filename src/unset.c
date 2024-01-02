@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:05:56 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/12/28 13:12:54 by mcarneir         ###   ########.fr       */
@@ -37,42 +37,76 @@ char	**ft_unsetenv(char **env, char *name)
 	return (new_env);
 }
 
-static int	unset_errors(t_simple_cmds *cmds)
+static int	handle_unset_errors(char *str)
+{
+	ft_putstr_fd("unset: `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+	return (EXIT_FAILURE);
+}
+
+int	unset_errors(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!cmds->str[0])
+	if (!str[0] || ft_isdigit(str[0]) || ft_strchr(str, '='))
 	{
-		ft_putendl_fd("unset: not enough arguments", STDERR_FILENO);
+		handle_unset_errors(str);
 		return (EXIT_FAILURE);
 	}
-	while (cmds->str[0][i])
+	while (str[i])
 	{
-		if (ft_isdigit(cmds->str[0][0]) 
-			|| (!ft_isalnum(cmds->str[0][i]) && cmds->str[0][i] != '_'))
+		if (is_identifier(str[i]))
 		{
-			ft_putstr_fd("unset: `", STDERR_FILENO);
-			ft_putstr_fd(cmds->str[0], STDERR_FILENO);
-			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+			handle_unset_errors(str);
 			return (EXIT_FAILURE);
 		}
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
-
+int	check_var(t_prompt *prompt, char *str)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	j = 0;
+	while (prompt->env[i])
+	{
+		if (!ft_strncmp(prompt->env[i], str, ft_strlen(str)))
+			return (0);
+		else
+		{
+			j = 0;
+		}
+		i++;
+	}
+	return (1);
+}
 int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**tmp;
-
-	if (unset_errors(cmds) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	else
+	int		i;
+	
+	i = -1;
+	if (!cmds->str[0])
 	{
-		tmp = ft_unsetenv(prompt->env, cmds->str[0]);
-		free_array(prompt->env);
-		prompt->env = tmp;
+		ft_putendl_fd("unset: not enough arguments", STDERR_FILENO);
+		return (EXIT_FAILURE);
 	}
+	else
+		while (cmds->str[++i])
+		{
+			if (unset_errors(cmds->str[i]))
+				break;
+			if (!check_var(prompt, cmds->str[i]))
+			{
+				tmp = ft_unsetenv(prompt->env, cmds->str[0]);
+				free_array(prompt->env);
+				prompt->env = tmp;
+			}
+		}
 	return (EXIT_SUCCESS);
 }

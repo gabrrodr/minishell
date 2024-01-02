@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/12/28 16:49:07 by mcarneir         ###   ########.fr       */
@@ -62,6 +62,7 @@ void	free_parser(t_simple_cmds *simple_cmds)
 		simple_cmds = simple_cmds->next;
 		free (tmp);
 	}
+	free(simple_cmds);
 }
 
 void	free_lexer(t_lexer *lst)

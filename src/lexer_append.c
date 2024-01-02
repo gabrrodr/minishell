@@ -58,6 +58,7 @@ int	ft_append_identifier(char **str, t_lexer **lexer_tok, size_t i)
 
 	tok = NULL;
 	tmp = *str;
+	tok = NULL;
 	while (tmp[i] && !ft_is_separator(tmp + i))
 	{
 		if (ft_is_quote(tmp[i]))

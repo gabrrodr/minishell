@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/12/28 16:29:33 by mcarneir         ###   ########.fr       */
@@ -91,7 +91,6 @@ void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 void	free_parser(t_simple_cmds *simple_cmds);
 void	free_lexer(t_lexer *lst);
-
 
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/12/28 16:46:45 by mcarneir         ###   ########.fr       */
@@ -14,7 +14,7 @@
 
 int	g_code;
 
-/*static void dev_mod(t_prompt *prompt)
+static void dev_mod(t_prompt *prompt)
 {
    t_simple_cmds  *cmds;
    t_lexer          *node;
@@ -60,7 +60,7 @@ int	g_code;
    printf("\n\033[1;32m* OUTPUT *\033[0m");
    printf("\n\033[1;32m--------------------------------------\033[0m\n");
    //exit(1);
-}*/
+}
 
 /*static void	end_program(char *input, t_prompt *prompt)
 {
@@ -113,6 +113,7 @@ int	main(int argc, char **argv, char **env)
 		if (prompt->lexer && !check_redirections(prompt))
 		{
 			parser(prompt);
+			dev_mod(prompt);
 			if (prompt->simple_cmds && !init_pid(prompt))
 				execute(prompt);
 		}

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
 /*   Updated: 2023/12/28 12:14:22 by mcarneir         ###   ########.fr       */
@@ -56,7 +56,7 @@ static void	exit_code(char **str)
 int	ms_exit(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**str;
-
+	
 	if (!cmds)
 	{
 		free_data(prompt);
