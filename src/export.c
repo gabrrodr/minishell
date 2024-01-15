@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:45:27 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 16:16:06 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:04:36 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ms_export(t_prompt *prompt, t_simple_cmds *cmds)
 		while (cmds->str[++i])
 		{
 			if (check_params(cmds->str[i]))
-				break ;
+				return (EXIT_FAILURE);
 			if (check_equal(prompt, cmds, i) == 0)
 			{
 				tmp = ft_split(cmds->str[i], '=');
