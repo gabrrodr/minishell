@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:38:54 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 11:57:50 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:39:08 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_args(t_prompt *prompt, char **args, int i)
 	{
 		if (is_exit_status(args[i]))
 		{
-			if (prompt->exit_codes[current_exit_status(prompt)] == 0)
+			if (prompt->exit_codes[current_exit_status(prompt)] == 1)
 				print_exit_status(args[i]);
 			else
 				ft_putstr_fd(args[i], STDOUT_FILENO);

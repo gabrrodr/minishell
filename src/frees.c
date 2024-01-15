@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 16:49:07 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:46:38 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,16 @@ void	free_lexer(t_lexer *lst)
 
 void	free_data(t_prompt *prompt)
 {
+	if (!prompt)
+		return ;
 	if (prompt->env)
 		free_array(prompt->env);
+	if (prompt->pid)
+		free(prompt->pid);
 	if (prompt->simple_cmds)
 		free_parser(prompt->simple_cmds);
 	if (prompt->lexer)
 		free_lexer(prompt->lexer);
-	if (prompt->pid)
-		free(prompt->pid);
 	if (prompt->pwd)
 		free(prompt->pwd);
 	if (prompt->oldpwd)

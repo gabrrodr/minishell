@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 16:03:57 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:22:18 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ static void	expand_word(t_prompt *prompt, char **word)
 	len = ft_strlen(*word);
 	while (++j < len)
 	{
-		if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word))
+		if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word) && !is_exit_status(*word))
 			handle_expandable(prompt, word, &j, &len);
 		else if (!is_expandable(*word) && (*word)[j] == '$' 
 				&& ft_isdigit((*word)[j + 1]))
 			handle_digit(word, &j, &len);
 	}
-	if (!is_expandable(*word) && is_exit_status(*word))
-		prompt->exit_codes[prompt->flg[2]++] = 0;
+	if (is_expandable(*word) && is_exit_status(*word))
+		prompt->exit_codes[prompt->flg[2]++] = 1;
 }
 
 static int	rdc_case(char *str)

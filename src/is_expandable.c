@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_expandable.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:30:27 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 12:39:04 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:18:32 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	handle_dol(char *str, int i, bool in_single_quotes)
 	if (str[i] == '$' && in_single_quotes)
 		return (false);
 	else if (str[i] == '$' && str[i + 1] == '?' && !in_single_quotes)
-		return (false);
+		return (true);
 	else if (str[i] == '$' && !in_single_quotes)
 	{
 		if (!ft_isdigit(str[i + 1]))

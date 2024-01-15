@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 16:29:33 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:33:19 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <limits.h>
+# include <sys/stat.h>
 
 typedef enum s_tokens
 {
@@ -91,6 +92,7 @@ void	free_array(char **arr);
 void	free_data(t_prompt *prompt);
 void	free_parser(t_simple_cmds *simple_cmds);
 void	free_lexer(t_lexer *lst);
+void	free_data_special(t_prompt *prompt);
 
 //lexer
 t_lexer	*ft_lexernew(char *str, t_tokens tokenType);

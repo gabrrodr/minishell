@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 12:11:34 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:15:45 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int	execute(t_prompt *prompt)
 	int				fd_in;
 	int				end[2];
 
-	cmd = prompt->simple_cmds;
 	fd_in = STDIN_FILENO;
+	cmd = prompt->simple_cmds;
 	if (!cmd->next)
 		return (single_cmd(prompt, cmd));
 	while (cmd)

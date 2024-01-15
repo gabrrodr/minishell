@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:23:12 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 13:11:45 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:09:21 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*str_expander(t_prompt *prompt, char *str)
 	char	*tmp;
 
 	tmp = NULL;
-	if (str[dol_sign(str) - 2] != '\'' && dol_sign(str) != 0 
+	if (str && dol_sign(str) != 0 && str[dol_sign(str) - 2] != '\''
 		&& str[dol_sign(str)] != '\0')
 	{
 		tmp = expand(prompt, str);
