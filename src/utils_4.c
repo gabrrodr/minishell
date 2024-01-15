@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:47:23 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 16:04:31 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:25:49 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ char	*replace(t_prompt *prompt, char *str)
 	{
 		free(word);
 		final_str = remove_var_from_str(str, port);
+		free(port);
 		return (final_str);
 	}
 	else
@@ -115,3 +116,5 @@ char	*replace(t_prompt *prompt, char *str)
 		return (final_str);
 	}
 }
+
+

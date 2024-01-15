@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 12:08:00 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:18:00 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,19 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	if (cmds->redirect)
 		if (setup_redirect(cmds))
+		{
+			free_data(prompt);
 			exit(1);
+		}
 	if (cmds->builtin)
 	{
-		g_code = builtin(prompt, cmds);
-		prompt->heredoc->err_num += g_code;
+		g_code += builtin(prompt, cmds);
+		free_data(prompt);
 		exit(g_code);
 	}
 	else if (!ft_strncmp(cmds->str[0], "$?", 3))
 	{
-		if (prompt->exit_codes[current_exit_status(prompt)] == 0)
+		if (prompt->exit_codes[current_exit_status(prompt)] == 1)
 			g_code = if_question_mark();
 		else
 			g_code = system_cmd(prompt, cmds);
@@ -76,6 +79,7 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	}
 	else if (cmds->str[0])
 		g_code = system_cmd(prompt, cmds);
+	free_data(prompt);
 	exit(g_code);
 }
 
@@ -91,8 +95,7 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (cmd && (!ft_strncmp(cmd, "exit", 5) || !ft_strncmp(cmd, "cd", 3)
 			|| !ft_strncmp(cmd, "export", 7) || !ft_strncmp(cmd, "unset", 6)))
 	{
-		prompt->heredoc->err_num += builtin(prompt, prompt->simple_cmds);
-		g_code = prompt->heredoc->err_num;
+		g_code += builtin(prompt, prompt->simple_cmds);
 		return (0);
 	}
 	send_heredoc(prompt, prompt->simple_cmds);

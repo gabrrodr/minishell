@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 13:14:06 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:37:09 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**dupe_arr(char **arr)
 	if (!dupe)
 		return (NULL);
 	i = 0;
-	while (arr[i])
+	while (arr && arr[i])
 	{
 		dupe[i] = ft_strdup(arr[i]);
 		if (!dupe[i])

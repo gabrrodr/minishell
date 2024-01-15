@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 16:46:45 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:24:02 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_code;
 
-static void dev_mod(t_prompt *prompt)
+/*static void dev_mod(t_prompt *prompt)
 {
    t_simple_cmds  *cmds;
    t_lexer          *node;
@@ -60,7 +60,7 @@ static void dev_mod(t_prompt *prompt)
    printf("\n\033[1;32m* OUTPUT *\033[0m");
    printf("\n\033[1;32m--------------------------------------\033[0m\n");
    //exit(1);
-}
+}*/
 
 /*static void	end_program(char *input, t_prompt *prompt)
 {
@@ -75,7 +75,7 @@ static t_prompt	*start_program(int argc, char **argv, char **env)
 
 	if (argc > 1)
 	{
-		printf("No arguments, please!\n");
+		ft_printf("No arguments, please!\n");
 		exit(1);
 	}
 	prompt = init_prompt(argv, env);
@@ -113,7 +113,7 @@ int	main(int argc, char **argv, char **env)
 		if (prompt->lexer && !check_redirections(prompt))
 		{
 			parser(prompt);
-			dev_mod(prompt);
+			//dev_mod(prompt);
 			if (prompt->simple_cmds && !init_pid(prompt))
 				execute(prompt);
 		}

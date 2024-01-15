@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 17:45:12 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/04/20 15:03:59 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/02 12:51:04 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_calloc(size_t nmenb, size_t size)
 
 	space = (nmenb * size);
 	res = malloc(space);
-	if (res == 0)
+	if (!res)
 		return (NULL);
 	ft_memset(res, 0, space);
 	return (res);

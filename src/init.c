@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 12:37:54 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:22:46 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	init_pid(t_prompt *prompt)
 		n_processes++;
 		process = process->next;
 	}
-	prompt->pid = malloc(sizeof(int) * n_processes);
+	if (!n_processes)
+		return (1);
+	prompt->pid = ft_calloc(n_processes, sizeof(int));
 	if (!prompt->pid)
 		return (ms_error(1));
 	return (0);
@@ -81,10 +83,10 @@ t_prompt	*init_prompt(char **argv, char **env)
 		return (NULL);
 	path = NULL;
 	prompt->lexer = NULL;
-	prompt->simple_cmds = init_simple_cmds();
 	prompt->heredoc = malloc(sizeof(t_heredoc));
 	if (!prompt->heredoc)
 		return (NULL);
+	prompt->simple_cmds = init_simple_cmds();
 	prompt->heredoc->err_num = 0;
 	prompt->heredoc->status = false;
 	prompt->interact = false;
@@ -95,8 +97,8 @@ t_prompt	*init_prompt(char **argv, char **env)
 	prompt->reset = false;
 	prompt->pid = NULL;
 	prompt->env = dupe_arr(env);
-	prompt = init_vars(prompt, argv, path);
 	prompt->pwd = getcwd(NULL, 0);
+	prompt = init_vars(prompt, argv, path);
 	prompt->oldpwd = NULL;
 	prompt->exit_codes = NULL;
 	return (prompt);
