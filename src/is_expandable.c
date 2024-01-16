@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:30:27 by mcarneir          #+#    #+#             */
-/*   Updated: 2024/01/15 13:18:32 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:54:13 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static bool	handle_dol(char *str, int i, bool in_single_quotes)
 		if (!ft_isdigit(str[i + 1]))
 		{
 			if (solo_doll_sign(str))
+			{
 				return (false);
+			}
 			else
 				return (true);
 		}

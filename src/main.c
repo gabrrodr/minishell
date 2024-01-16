@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/15 13:24:02 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:55:57 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	main(int argc, char **argv, char **env)
 		if (input == NULL)
 		{
 			free(input);
+			printf("exit\n");
 			ms_exit(prompt, NULL);
 		}
 		add_history(input);

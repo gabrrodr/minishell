@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/15 13:18:00 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:54:48 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	**get_path(t_prompt *prompt)
 
 	i = -1;
 	path = ms_getenv(prompt->env, "PATH");
+	if (!path)
+		return (NULL);
 	paths = ft_split(path, ':');
 	free(path);
 	while (paths[++i])
@@ -43,6 +45,8 @@ int	system_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (!access(cmds->str[0], F_OK))
 		execve(cmds->str[0], cmds->str, prompt->env);
 	path = get_path(prompt);
+	if (!path)
+		return (handle_error_cmd(cmds));
 	i = -1;
 	while (path[++i])
 	{
