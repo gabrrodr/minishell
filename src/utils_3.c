@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:31:37 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/04 15:59:10 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:11:47 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,10 @@ bool	solo_doll_sign(const char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '$' && (str[i + 1] == ' ' || str[i + 1] == '\0' || str[i + 1] == '\'' || str[i + 1] == '\"'))
 			doll++;
-		if (str[i] != '\'' && str[i] != '\"' && str[i] != '$')
-			return (false);
 	}
-	if (doll > 1)
-		return (false);
-	return (true);
+	if (doll > 0)
+		return (true);
+	return (false);
 }

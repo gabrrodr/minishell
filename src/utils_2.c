@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/15 13:22:18 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:45:44 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,13 @@ static void	expand_word(t_prompt *prompt, char **word)
 		prompt->exit_codes[prompt->flg[2]++] = 1;
 }
 
-static int	rdc_case(char *str)
-{
-	if (!ft_strncmp(str, "<<", 2))
-		return (1);
-	return (0);
-}
-
 char	*expand_input(t_prompt *prompt, char *input)
 {
-	char	**arr;
-	int		i;
-
 	prompt->flg[2] = 0;
 	init_exit_codes(prompt, input);
 	if (!prompt->exit_codes)
 		return (NULL);
-	arr = ft_split(input, ' ');
-	if (!arr)
-		return (NULL);
-	i = 0;
-	while (arr[i])
-	{
-		if (rdc_case(arr[i]))
-			i++;
-		else
-			expand_word(prompt, &arr[i]);
-		i++;
-	}
-	return (array_to_str(arr));
+	expand_word(prompt, &input);
+	return (input);
 }
 

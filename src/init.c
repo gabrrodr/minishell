@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/04 17:22:46 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:00:50 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ t_prompt	*init_vars(t_prompt *prompt, char **argv, char *key)
 	free(key);
 	prompt->env = ms_setenv("SHLVL=", value, prompt->env);
 	free (value);
-	prompt->env = ms_setenv("PATH=", path, prompt->env);
+	key = ms_getenv(prompt->env, "PATH=");
+	if (!key)
+		prompt->env = ms_setenv("PATH=", path, prompt->env);
+	free(key);
 	key = ms_getenv(prompt->env, "_=");
 	if (key)
 		prompt->env = ms_setenv("_=", argv[0], prompt->env);
