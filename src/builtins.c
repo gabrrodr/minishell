@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/15 16:07:55 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:53:52 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	ms_pwd(t_prompt *prompt)
 
 void	ms_echo(t_simple_cmds *process, t_prompt *prompt)
 {
-	int	i;
-	int	j;
-	int	n_flag;
+	int		i;
+	int		j;
+	int		n_flag;
 	char	**args;
 
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:05:56 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 13:12:54 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:07:41 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ int	unset_errors(char *str)
 	}
 	return (EXIT_SUCCESS);
 }
+
 int	check_var(t_prompt *prompt, char *str)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while (prompt->env[i])
@@ -78,18 +79,17 @@ int	check_var(t_prompt *prompt, char *str)
 		if (!ft_strncmp(prompt->env[i], str, ft_strlen(str)))
 			return (0);
 		else
-		{
 			j = 0;
-		}
 		i++;
 	}
 	return (1);
 }
+
 int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	char	**tmp;
 	int		i;
-	
+
 	i = -1;
 	if (!cmds->str[0])
 	{
@@ -97,10 +97,11 @@ int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 		return (EXIT_FAILURE);
 	}
 	else
+	{
 		while (cmds->str[++i])
 		{
 			if (unset_errors(cmds->str[i]))
-				break;
+				break ;
 			if (!check_var(prompt, cmds->str[i]))
 			{
 				tmp = ft_unsetenv(prompt->env, cmds->str[0]);
@@ -108,5 +109,6 @@ int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 				prompt->env = tmp;
 			}
 		}
+	}
 	return (EXIT_SUCCESS);
 }

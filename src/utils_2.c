@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/16 15:45:44 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:12:36 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+extern int	g_code;
 
 static void	handle_digit(char **word, int *j, int *len)
 {
@@ -49,6 +51,7 @@ static void	handle_expandable(t_prompt *prompt, char **word, int *j, int *len)
 		*len = ft_strlen(*word);
 	}
 }
+
 static void	expand_word(t_prompt *prompt, char **word)
 {
 	int		j;
@@ -58,7 +61,11 @@ static void	expand_word(t_prompt *prompt, char **word)
 	len = ft_strlen(*word);
 	while (++j < len)
 	{
-		if ((*word)[j] == '$' && is_expandable(*word) && !solo_doll_sign(*word) && !is_exit_status(*word))
+		if ((*word)[j] == '$' && ((*word)[j + 1] == '?') 
+				&& is_expandable(*word))
+			replace_exit_mark(prompt, word, &j, &len);
+		else if ((*word)[j] == '$' && is_expandable(*word) 
+				&& !solo_doll_sign(*word))
 			handle_expandable(prompt, word, &j, &len);
 		else if (!is_expandable(*word) && (*word)[j] == '$' 
 				&& ft_isdigit((*word)[j + 1]))
@@ -78,3 +85,12 @@ char	*expand_input(t_prompt *prompt, char *input)
 	return (input);
 }
 
+int	sl(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	return (i);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 10:36:43 by mcarneir          #+#    #+#             */
-/*   Updated: 2023/12/28 15:14:25 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:44:20 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,7 @@ int	ms_cd(t_prompt *tools, t_simple_cmds *simple_cmd)
 		return (1);
 	}
 	else
-	{
-		ret = chdir(simple_cmd->str[0]);
-		if (ret != 0)
-		{
-			ft_putstr_fd("minishell: ", STDERR_FILENO);
-			ft_putstr_fd(simple_cmd->str[0], STDERR_FILENO);
-			perror(" ");
-		}
-	}
+		ret = change_directory(simple_cmd->str[0]);
 	if (ret != 0)
 		return (1);
 	change_path(tools);

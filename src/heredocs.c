@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredocs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:17:23 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 15:55:26 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:56:46 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,11 @@ int	send_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 t_simple_cmds	*single_cmd_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 {
 	t_lexer			*redirect;
-	(void)prompt;
 
-	//cmds->str = single_cmd_expander(prompt, cmds->str);
+	(void)prompt;
 	redirect = cmds->redirect;
 	while (cmds->redirect)
 	{
-		/*if (cmds->redirect->token == LESS_LESS)
-			cmds->redirect->str = str_expander(prompt, cmds->redirect->str);*/
 		if (cmds->redirect->next == NULL)
 			break ;
 		cmds->redirect = cmds->redirect->next;

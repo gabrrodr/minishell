@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/16 17:00:50 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:08:36 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,15 @@ t_simple_cmds	*init_simple_cmds(void)
 	return (cmds);
 }
 
+t_prompt	*init_flg(t_prompt *prompt)
+{
+	prompt->flg[0] = 0;
+	prompt->flg[1] = 0;
+	prompt->flg[2] = 0;
+	prompt->flg[3] = 0;
+	return (prompt);
+}
+
 t_prompt	*init_prompt(char **argv, char **env)
 {
 	t_prompt	*prompt;
@@ -93,10 +102,7 @@ t_prompt	*init_prompt(char **argv, char **env)
 	prompt->heredoc->err_num = 0;
 	prompt->heredoc->status = false;
 	prompt->interact = false;
-	prompt->flg[0] = 0;
-	prompt->flg[1] = 0;
-	prompt->flg[2] = 0;
-	prompt->flg[3] = 0;
+	prompt = init_flg(prompt);
 	prompt->reset = false;
 	prompt->pid = NULL;
 	prompt->env = dupe_arr(env);

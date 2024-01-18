@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:04:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 16:32:44 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:15:33 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	error_redirections(t_lexer *lexer)
 		ft_putstr_fd("'|'\n", STDERR_FILENO);
 	else
 		ft_putstr_fd("'newline'\n", STDERR_FILENO);
-	//ft_clear_lexer(&lexer);
 	return (1);
 }
 

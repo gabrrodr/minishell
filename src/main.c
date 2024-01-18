@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/16 16:55:57 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:53:31 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,21 @@ static t_prompt	*start_program(int argc, char **argv, char **env)
 	return (prompt);
 }
 
+static char	*handle_input(t_prompt *prompt, char *input)
+{
+	if (input == NULL)
+	{
+		free(input);
+		printf("exit\n");
+		ms_exit(prompt, NULL);
+	}
+	if (input[0] && !is_only_whitespaces(input))
+		add_history(input);
+	if (input || input[0])
+		input = expand_input(prompt, input);
+	return (input);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_prompt	*prompt;
@@ -95,16 +110,7 @@ int	main(int argc, char **argv, char **env)
 		prompt->interact = true;
 		input = readline("\001\e[1;35m\002minishell$ \001\e[0m\002");
 		prompt->interact = false;
-		if (input == NULL)
-		{
-			free(input);
-			printf("exit\n");
-			ms_exit(prompt, NULL);
-		}
-		add_history(input);
-		if (!input || !input[0])
-			continue ;
-		input = expand_input(prompt, input);
+		input = handle_input(prompt, input);
 		prompt->lexer = lexer(input);
 		if (!prompt->lexer && !check_redirections(prompt))
 		{
@@ -114,7 +120,6 @@ int	main(int argc, char **argv, char **env)
 		if (prompt->lexer && !check_redirections(prompt))
 		{
 			parser(prompt);
-			//dev_mod(prompt);
 			if (prompt->simple_cmds && !init_pid(prompt))
 				execute(prompt);
 		}

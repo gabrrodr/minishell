@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:50:29 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/16 16:27:46 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:12:09 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	spicy_length(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '=')
-		i++;
-	return (i);
-}
 
 char	*get_env(t_prompt *prompt, char *val)
 {
@@ -31,7 +21,7 @@ char	*get_env(t_prompt *prompt, char *val)
 	i[0] = -1;
 	while (prompt->env[++i[0]])
 	{
-		if (!ft_strncmp(val, prompt->env[i[0]], spicy_length(prompt->env[i[0]])))
+		if (!ft_strncmp(val, prompt->env[i[0]], sl(prompt->env[i[0]])))
 		{
 			free(val);
 			i[1] = 0;
