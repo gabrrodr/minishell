@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:07:09 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:45:14 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	system_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 
 void	free_exit(t_prompt *prompt)
 {
-	free_data(prompt);
+	free_data(prompt, false);
 	exit(1);
 }
 
@@ -75,7 +75,7 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (cmds->builtin)
 	{
 		g_code += builtin(prompt, cmds);
-		free_data(prompt);
+		free_data(prompt, false);
 		exit(g_code);
 	}
 	else if (!ft_strncmp(cmds->str[0], "$?", 3))
@@ -88,7 +88,7 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	}
 	else if (cmds->str[0])
 		g_code = system_cmd(prompt, cmds);
-	free_data(prompt);
+	free_data(prompt, false);
 	exit(g_code);
 }
 

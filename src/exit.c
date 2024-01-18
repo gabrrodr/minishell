@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:23:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 13:52:48 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:47:13 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ms_exit(t_prompt *prompt, t_simple_cmds *cmds)
 
 	if (!cmds)
 	{
-		free_data(prompt);
+		free_data(prompt, false);
 		exit(g_code);
 	}
 	if (!cmds->prev)
@@ -74,7 +74,7 @@ int	ms_exit(t_prompt *prompt, t_simple_cmds *cmds)
 		}
 	}
 	str = dupe_arr(cmds->str);
-	free_data(prompt);
+	free_data(prompt, false);
 	rl_clear_history();
 	exit_code(str);
 	return (EXIT_SUCCESS);

@@ -3,32 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/17 18:21:54 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:52:24 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_prompt	*reset_prompt(t_prompt *prompt, char **argv, char **env)
+static t_prompt	*reset_init(t_prompt *prompt, char **argv, char **env)
 {
-	t_prompt	*reset;
+	char	*path;
+
+	path = NULL;
+	prompt->lexer = NULL;
+	prompt->simple_cmds = init_simple_cmds();
+	prompt->heredoc = malloc(sizeof(t_heredoc));
+	if (!prompt->heredoc)
+		return (NULL);
+	prompt->pid = NULL;
+	prompt->exit_codes = NULL;
+	init_flags(prompt);
+	prompt->env = dupe_arr(env);
+	init_vars(prompt, argv, path);
+	return (prompt);
+}
+
+void	reset_prompt(t_prompt *prompt, char **argv, char **env)
+{
 	char		**old_env;
 
 	old_env = dupe_arr(prompt->env);
-	free_data(prompt);
-	reset = init_prompt(argv, env);
-	reset->reset = true;
-	if (reset->env)
+	free_data(prompt, true);
+	reset_init(prompt, argv, env);
+	prompt->reset = true;
+	if (prompt->env)
 	{
-		free_array(reset->env);
-		reset->env = old_env;
+		free_array(prompt->env);
+		prompt->env = old_env;
 	}
 	else
 		free_array(old_env);
-	return (reset);
 }
 
 void	free_array(char **arr)
@@ -81,25 +97,30 @@ void	free_lexer(t_lexer *lst)
 	}
 }
 
-void	free_data(t_prompt *prompt)
+void	free_data(t_prompt *prompt, bool reset)
 {
 	if (!prompt)
 		return ;
-	if (prompt->env)
-		free_array(prompt->env);
 	if (prompt->pid)
 		free(prompt->pid);
-	if (prompt->simple_cmds)
-		free_parser(prompt->simple_cmds);
 	if (prompt->lexer)
 		free_lexer(prompt->lexer);
-	if (prompt->pwd)
-		free(prompt->pwd);
-	if (prompt->oldpwd)
-		free(prompt->oldpwd);
-	if (prompt->exit_codes)
-		free(prompt->exit_codes);
+	if (prompt->simple_cmds)
+		free_parser(prompt->simple_cmds);
 	if (prompt->heredoc)
 		free(prompt->heredoc);
-	free(prompt);
+	if (prompt->env)
+		free_array(prompt->env);
+	if (prompt->exit_codes)
+		free(prompt->exit_codes);
+	if (reset)
+		prompt = NULL;
+	else
+	{
+		if (prompt->pwd)
+			free(prompt->pwd);
+		if (prompt->oldpwd)
+			free(prompt->oldpwd);
+		free(prompt);
+	}
 }
