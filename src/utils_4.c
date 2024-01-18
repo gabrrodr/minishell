@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:47:23 by mcarneir          #+#    #+#             */
-/*   Updated: 2024/01/15 13:25:49 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:55:22 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*get_var(char *str)
 	return (val);
 }
 
-static char	*create_str(t_prompt *prompt, char *str, char *var, char *word)
+char	*create_str(t_prompt *prompt, char *str, char *var, char *word)
 {
 	size_t	final_length;
 	char	*final_str;
@@ -117,4 +117,19 @@ char	*replace(t_prompt *prompt, char *str)
 	}
 }
 
+bool	is_only_whitespaces(char *str)
+{
+	int	i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			i++;
+		else
+			break ;
+	}
+	if (!str[i])
+		return (true);
+	return (false);
+}

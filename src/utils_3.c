@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:31:37 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/16 16:11:47 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:54:47 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*get_word(char *str)
 {
-   char   *val;
-   int       i;
-   int       j;
-   int       start;
+	char		*val;
+	int			i;
+	int			j;
+	int			start;
 
 	i = 0;
 	while (str[i] && str[i] != '$')
@@ -57,7 +57,7 @@ char	*array_to_str(char **arr)
 		return (NULL);
 	while (*str != NULL)
 	{
-		total_length += strlen(*str);
+		total_length += ft_strlen(*str);
 		str++;
 	}
 	total_length += (size_t)(str - arr - 1);
@@ -101,7 +101,8 @@ bool	solo_doll_sign(const char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] == '$' && (str[i + 1] == ' ' || str[i + 1] == '\0' || str[i + 1] == '\'' || str[i + 1] == '\"'))
+		if (str[i] == '$' && (str[i + 1] == ' ' || str[i + 1] == '\0' 
+				|| str[i + 1] == '\'' || str[i + 1] == '\"'))
 			doll++;
 	}
 	if (doll > 0)
