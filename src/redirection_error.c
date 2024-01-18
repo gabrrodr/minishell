@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_error.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:04:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:15:33 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:03:11 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,32 @@ int	check_redirections(t_prompt *prompt)
 	tmp = prompt->lexer;
 	while (tmp)
 	{
+		if (tmp->token == GREAT || tmp->token == GREAT_GREAT ||
+			tmp->token == LESS || tmp->token == LESS_LESS)
+		{
+			if ((tmp->next && tmp->next->token != IDENTIFIER) || !tmp->next)
+			{  
+				g_code = 2;
+				return (error_redirections(tmp));
+			}
+		}
+		else if (tmp->token == PIPE && (!tmp->next || tmp->next->token == PIPE))
+		{
+			g_code = 2;
+			return (error_redirections(tmp));
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+/*int	check_redirections(t_prompt *prompt)
+{
+	t_lexer	*tmp;
+
+	tmp = prompt->lexer;
+	while (tmp)
+	{
 		if (tmp->token == GREAT || tmp->token == GREAT_GREAT
 			|| tmp->token == LESS || tmp->token == LESS_LESS
 			|| tmp->token == PIPE)
@@ -62,4 +88,4 @@ int	check_redirections(t_prompt *prompt)
 		tmp = tmp->next;
 	}
 	return (0);
-}
+}*/

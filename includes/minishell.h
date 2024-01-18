@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:12:51 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:52:05 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,14 @@ typedef struct s_prompt
 t_prompt		*init_prompt(char **argv, char **env);
 t_simple_cmds	*init_simple_cmds(void);
 int				init_pid(t_prompt *prompt);
-
+void			init_flags(t_prompt *prompt);
 void			exit_env(t_prompt *prompt);
+void			init_vars(t_prompt *prompt, char **argv, char *key);
 char			**dupe_arr(char **arr);
 
 //frees
 void			free_array(char **arr);
-void			free_data(t_prompt *prompt);
+void			free_data(t_prompt *prompt, bool reset);
 void			free_parser(t_simple_cmds *simple_cmds);
 void			free_lexer(t_lexer *lst);
 
@@ -130,7 +131,7 @@ int				sl(char *str);
 
 //void	replace_variables(t_prompt *prompt);
 char			*expand_input(t_prompt *prompt, char *input);
-t_prompt		*reset_prompt(t_prompt *prompt, char **argv, char **env);
+void			reset_prompt(t_prompt *prompt, char **argv, char **env);
 
 //builtins
 void			ms_echo(t_simple_cmds *process, t_prompt *prompt);

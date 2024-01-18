@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:32:31 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 13:08:36 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:56:00 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_pid(t_prompt *prompt)
 	return (0);
 }
 
-t_prompt	*init_vars(t_prompt *prompt, char **argv, char *key)
+void	init_vars(t_prompt *prompt, char **argv, char *key)
 {
 	char	*value;
 	char	*path;
@@ -56,7 +56,6 @@ t_prompt	*init_vars(t_prompt *prompt, char **argv, char *key)
 	if (key)
 		prompt->env = ms_setenv("_=", argv[0], prompt->env);
 	free(key);
-	return (prompt);
 }
 
 t_simple_cmds	*init_simple_cmds(void)
@@ -76,13 +75,16 @@ t_simple_cmds	*init_simple_cmds(void)
 	return (cmds);
 }
 
-t_prompt	*init_flg(t_prompt *prompt)
+void	init_flags(t_prompt *prompt)
 {
+	prompt->heredoc->err_num = 0;
+	prompt->heredoc->status = false;
+	prompt->interact = false;
 	prompt->flg[0] = 0;
 	prompt->flg[1] = 0;
 	prompt->flg[2] = 0;
 	prompt->flg[3] = 0;
-	return (prompt);
+	prompt->reset = false;
 }
 
 t_prompt	*init_prompt(char **argv, char **env)
@@ -99,15 +101,11 @@ t_prompt	*init_prompt(char **argv, char **env)
 	if (!prompt->heredoc)
 		return (NULL);
 	prompt->simple_cmds = init_simple_cmds();
-	prompt->heredoc->err_num = 0;
-	prompt->heredoc->status = false;
-	prompt->interact = false;
-	prompt = init_flg(prompt);
-	prompt->reset = false;
+	init_flags(prompt);
 	prompt->pid = NULL;
 	prompt->env = dupe_arr(env);
 	prompt->pwd = getcwd(NULL, 0);
-	prompt = init_vars(prompt, argv, path);
+	init_vars(prompt, argv, path);
 	prompt->oldpwd = NULL;
 	prompt->exit_codes = NULL;
 	return (prompt);

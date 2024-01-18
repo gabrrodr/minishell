@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:03:50 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 13:53:31 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:59:07 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int	main(int argc, char **argv, char **env)
 		prompt->interact = false;
 		input = handle_input(prompt, input);
 		prompt->lexer = lexer(input);
-		if (!prompt->lexer && !check_redirections(prompt))
+		if (!prompt->lexer)
 		{
-			prompt = reset_prompt(prompt, argv, env);
+			reset_prompt(prompt, argv, env);
 			continue ;
 		}
 		if (prompt->lexer && !check_redirections(prompt))
@@ -123,6 +123,6 @@ int	main(int argc, char **argv, char **env)
 			if (prompt->simple_cmds && !init_pid(prompt))
 				execute(prompt);
 		}
-		prompt = reset_prompt(prompt, argv, env);
+		reset_prompt(prompt, argv, env);
 	}
 }

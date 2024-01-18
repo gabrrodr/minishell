@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredocs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:17:23 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 14:56:46 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:53:10 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	heredoc(t_prompt *prompt, t_lexer *redirect,
 
 	fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	line = readline("> ");
-	while (line && ft_strncmp(line, redirect->str, ft_strlen(redirect->str))
+	while (line && ft_strncmp(line, redirect->str, ft_strlen(redirect->str) + 1)
 		&& g_code != 2)
 	{
 		if (quote == false)
