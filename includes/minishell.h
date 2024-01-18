@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:52:05 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:26:03 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ char			*str_expander(t_prompt *prompt, char *str);
 char			**single_cmd_expander(t_prompt *prompt, char **str);
 bool			solo_doll_sign(const char *str);
 char			*create_str(t_prompt *prompt, char *str, char *var, char *word);
+bool			there_is_expand(char *str, int i);
 
 //error
 int				ms_error(int error);
