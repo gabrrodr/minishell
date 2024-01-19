@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:51:32 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:52:24 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:12:30 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static t_prompt	*reset_init(t_prompt *prompt, char **argv, char **env)
-{
-	char	*path;
-
-	path = NULL;
-	prompt->lexer = NULL;
-	prompt->simple_cmds = init_simple_cmds();
-	prompt->heredoc = malloc(sizeof(t_heredoc));
-	if (!prompt->heredoc)
-		return (NULL);
-	prompt->pid = NULL;
-	prompt->exit_codes = NULL;
-	init_flags(prompt);
-	prompt->env = dupe_arr(env);
-	init_vars(prompt, argv, path);
-	return (prompt);
-}
 
 void	reset_prompt(t_prompt *prompt, char **argv, char **env)
 {

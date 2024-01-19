@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:04:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:37:15 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:20:58 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	check_redirections(t_prompt *prompt)
 				return (error_redirections(tmp));
 			}
 		}
-		else if (tmp->token == PIPE && (!tmp->next || tmp->next->token == PIPE))
+		else if (tmp->token == PIPE && (!tmp->next || tmp->next->token == PIPE 
+				|| !tmp->prev))
 		{
 			g_code = 2;
 			return (error_redirections(tmp));

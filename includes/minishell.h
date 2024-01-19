@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:26:03 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:40:47 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void			free_array(char **arr);
 void			free_data(t_prompt *prompt, bool reset);
 void			free_parser(t_simple_cmds *simple_cmds);
 void			free_lexer(t_lexer *lst);
+t_prompt		*reset_init(t_prompt *prompt, char **argv, char **env);
 
 //lexer
 t_lexer			*ft_lexernew(char *str, t_tokens tokenType);
@@ -128,6 +129,7 @@ bool			is_expandable(char *str);
 bool			is_only_whitespaces(char *str);
 int				change_directory(char *path);
 int				sl(char *str);
+bool			doll_between_quotes(char *str);
 
 //void	replace_variables(t_prompt *prompt);
 char			*expand_input(t_prompt *prompt, char *input);
