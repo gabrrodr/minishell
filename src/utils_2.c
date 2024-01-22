@@ -6,13 +6,36 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:12:36 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:11:56 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 extern int	g_code;
+
+static void	handle_quote(char **word, int *j, int *len)
+{
+	int	k;
+
+	k = *j + 1;
+	if (k >= *len || (*word)[k] == '\0') 
+	{
+		(*word)[*j] = '\0';
+		*len = *j;
+		*j = -1;
+		return ;
+	}
+	while ((*word)[k] != '\0') 
+	{
+		(*word)[*j] = (*word)[k];
+		(*j)++;
+		k++;
+	}
+	(*word)[*j] = '\0';
+	*len = *j;
+	*j = -1;
+}
 
 static void	handle_digit(char **word, int *j, int *len)
 {
@@ -70,6 +93,10 @@ static void	expand_word(t_prompt *prompt, char **word)
 		else if (!is_expandable(*word) && (*word)[j] == '$' 
 				&& ft_isdigit((*word)[j + 1]))
 			handle_digit(word, &j, &len);
+		else if ((*word)[j] == '$' && ft_is_quote((*word)[j + 1]) 
+				&& ((*word)[j + 2] && !ft_is_quote((*word)[j + 2]))
+					&& !doll_between_quotes(*word))
+			handle_quote(word, &j, &len);
 	}
 	if (is_expandable(*word) && is_exit_status(*word))
 		prompt->exit_codes[prompt->flg[2]++] = 1;
@@ -83,14 +110,4 @@ char	*expand_input(t_prompt *prompt, char *input)
 		return (NULL);
 	expand_word(prompt, &input);
 	return (input);
-}
-
-int	sl(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '=')
-		i++;
-	return (i);
 }

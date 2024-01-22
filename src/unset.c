@@ -6,7 +6,7 @@
 /*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:05:56 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 14:07:41 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:12:23 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 				break ;
 			if (!check_var(prompt, cmds->str[i]))
 			{
-				tmp = ft_unsetenv(prompt->env, cmds->str[0]);
+				tmp = ft_unsetenv(prompt->env, cmds->str[i]);
 				free_array(prompt->env);
 				prompt->env = tmp;
 			}

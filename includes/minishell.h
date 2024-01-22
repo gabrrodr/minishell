@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:52:05 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:40:47 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void			free_array(char **arr);
 void			free_data(t_prompt *prompt, bool reset);
 void			free_parser(t_simple_cmds *simple_cmds);
 void			free_lexer(t_lexer *lst);
+t_prompt		*reset_init(t_prompt *prompt, char **argv, char **env);
 
 //lexer
 t_lexer			*ft_lexernew(char *str, t_tokens tokenType);
@@ -128,6 +129,7 @@ bool			is_expandable(char *str);
 bool			is_only_whitespaces(char *str);
 int				change_directory(char *path);
 int				sl(char *str);
+bool			doll_between_quotes(char *str);
 
 //void	replace_variables(t_prompt *prompt);
 char			*expand_input(t_prompt *prompt, char *input);
@@ -171,6 +173,7 @@ char			*str_expander(t_prompt *prompt, char *str);
 char			**single_cmd_expander(t_prompt *prompt, char **str);
 bool			solo_doll_sign(const char *str);
 char			*create_str(t_prompt *prompt, char *str, char *var, char *word);
+bool			there_is_expand(char *str, int i);
 
 //error
 int				ms_error(int error);

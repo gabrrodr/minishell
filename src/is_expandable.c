@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_expandable.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:30:27 by mcarneir          #+#    #+#             */
-/*   Updated: 2024/01/16 15:54:13 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:36:26 by mcarneir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ bool	is_expandable(char *str)
 			in_double_quotes = !in_double_quotes;
 		else if (str[i] == '$')
 			return (handle_dol(str, i, in_single_quotes));
+		else if (((str[i] == '<' && str[i + 1] == '<') 
+				|| (str[i] == '>' && str[i + 1] == '>')) 
+			&& there_is_expand(str, i))
+			return (false);
 	}
 	return (true);
 }
