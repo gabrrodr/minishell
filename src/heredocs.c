@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:17:23 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:53:10 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:11:27 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ static int	heredoc(t_prompt *prompt, t_lexer *redirect,
 	while (line && ft_strncmp(line, redirect->str, ft_strlen(redirect->str) + 1)
 		&& g_code != 2)
 	{
-		if (quote == false)
-			line = str_expander(prompt, line);
+		if (quote == false && !solo_doll_sign(line)
+			&& ft_strncmp(line, redirect->str, ft_strlen(redirect->str) + 1))
+			line = spicy_expand(prompt, line);
 		ft_putendl_fd(line, fd);
 		free(line);
 		line = readline("> ");
@@ -51,7 +52,8 @@ static int	heredoc(t_prompt *prompt, t_lexer *redirect,
 	return (0);
 }
 
-static int	check_heredoc(t_prompt *prompt, t_lexer *redirect, char *file_name)
+static int	check_heredoc(t_prompt *prompt, t_simple_cmds *cmds, 
+				t_lexer *redirect, char *file_name)
 {
 	int		hd;
 	bool	quote;
@@ -68,7 +70,10 @@ static int	check_heredoc(t_prompt *prompt, t_lexer *redirect, char *file_name)
 	delquotes(redirect->str, '\"');
 	delquotes(redirect->str, '\'');
 	hd = heredoc(prompt, redirect, quote, file_name);
-	prompt->heredoc->status = true;
+	if (cmds && cmds->builtin && ft_strncmp(cmds->builtin, "echo", 5))
+	{
+		prompt->heredoc->status = true;
+	}
 	return (hd);
 }
 
@@ -84,7 +89,7 @@ int	send_heredoc(t_prompt *prompt, t_simple_cmds *cmds)
 			if (cmds->hd_file_name)
 				free(cmds->hd_file_name);
 			cmds->hd_file_name = set_file_name();
-			if (check_heredoc(prompt, redirect, cmds->hd_file_name))
+			if (check_heredoc(prompt, cmds, redirect, cmds->hd_file_name))
 			{
 				prompt->heredoc->err_num = 1;
 				return (1);

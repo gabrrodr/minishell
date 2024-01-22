@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:40:14 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/19 10:52:33 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:18:31 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	builtin(t_prompt *prompt, t_simple_cmds *process)
 	else if (!ft_strncmp(cmd, "env", 4))
 		ms_env(prompt);
 	else if (!ft_strncmp(cmd, "exit", 5))
-		ms_exit(prompt, process);
+		status = ms_exit(prompt, process);
 	else if (!ft_strncmp(cmd, "cd", 3))
 		status = ms_cd(prompt, process);
 	return (status);

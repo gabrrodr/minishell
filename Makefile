@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+         #
+#    By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:38:36 by gabrrodr          #+#    #+#              #
-#    Updated: 2024/01/18 18:20:58 by mcarneir         ###   ########.fr        #
+#    Updated: 2024/01/22 16:37:10 by gabrrodr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = 	src/main.c \
 		src/lexer_append.c \
 		src/parser.c \
 		src/parser_utils.c \
+		src/parser_utils2.c \
 		src/builtins.c \
 		src/builtins_utils.c \
 		src/unset.c \

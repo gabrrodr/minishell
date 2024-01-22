@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:10:10 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/04 13:23:06 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:10:40 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	process_tokens(t_prompt *prompt, t_simple_cmds *cmds)
 			return ;
 		if (prompt->lexer->token == IDENTIFIER)
 		{
-			if (prompt->flg[3] == 0 && is_builtin(prompt->lexer->str))
+			if (prompt->flg[3] == 0 && is_builtin(prompt->lexer->str)
+				&& !cmds->builtin)
 				cmds->builtin = ft_strdup(prompt->lexer->str);
 			else
 			{

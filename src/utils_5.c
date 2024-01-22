@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:18:52 by mcarneir          #+#    #+#             */
-/*   Updated: 2024/01/19 13:12:02 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:06:45 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*spicy_expand(t_prompt *prompt, char *input)
+{
+	prompt->flg[2] = 0;
+	expand_word(prompt, &input);
+	return (input);
+}
 
 bool	there_is_expand(char *str, int i)
 {

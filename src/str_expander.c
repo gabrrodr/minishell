@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:23:12 by mcarneir          #+#    #+#             */
-/*   Updated: 2024/01/19 13:26:19 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:11:57 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ char	*str_expander(t_prompt *prompt, char *str)
 		&& str[dol_sign(str)] != '\0')
 	{
 		tmp = expand(prompt, str);
-    	free(str);
-    	str = tmp;
-    	free(tmp);
+		free(str);
+		str = tmp;
+		free(tmp);
 	}
 	str = delquotes(str, '\"');
 	str = delquotes(str, '\'');

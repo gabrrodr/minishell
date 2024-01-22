@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:47:16 by gabrrodr          #+#    #+#             */
-/*   Updated: 2023/12/28 12:45:07 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:39:49 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ int	is_builtin(char *str)
 	return (0);
 }
 
+int	count_builtin_nodes(t_lexer *tmp)
+{
+	int	count;
+
+	count = 0;
+	while (tmp && tmp->str && is_builtin(tmp->str))
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
 int	nbr_nodes(t_lexer *lexer)
 {
 	int		i;
@@ -45,13 +58,13 @@ int	nbr_nodes(t_lexer *lexer)
 			return (i);
 		if (tmp->token && tmp->token != IDENTIFIER)
 		{
-			if (tmp->next && (tmp->next->next || tmp->next->token))
-				tmp = tmp->next->next;
-			else
-				tmp = tmp->next;
+			tmp = move_to_next_node(tmp);
 		}
 		else if (is_builtin(tmp->str))
+		{
 			tmp = tmp->next;
+			i += count_builtin_nodes(tmp);
+		}
 		else
 		{
 			i++;
