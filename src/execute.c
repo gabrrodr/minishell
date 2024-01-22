@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:44:25 by mcarneir          #+#    #+#             */
-/*   Updated: 2024/01/04 17:15:45 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:25:08 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ static int	check_fd_heredoc(t_prompt *prompt, t_simple_cmds *cmd, int end[2])
 	if (prompt->heredoc->status)
 	{
 		close(end[0]);
+		if (!cmd->hd_file_name)
+			return (-1);
 		fd_in = open(cmd->hd_file_name, O_RDONLY);
+		if (fd_in == -1)
+			return (-1);
 	}
 	else
 		fd_in = end[0];

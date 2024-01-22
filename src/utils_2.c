@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:58:13 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/19 13:11:56 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:07:52 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	handle_expandable(t_prompt *prompt, char **word, int *j, int *len)
 	}
 }
 
-static void	expand_word(t_prompt *prompt, char **word)
+void	expand_word(t_prompt *prompt, char **word)
 {
 	int		j;
 	int		len;

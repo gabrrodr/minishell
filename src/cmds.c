@@ -6,7 +6,7 @@
 /*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:09:48 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:45:14 by gabrrodr         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:20:36 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	handle_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	}
 	if (cmds->builtin)
 	{
-		g_code += builtin(prompt, cmds);
+		g_code = builtin(prompt, cmds);
 		free_data(prompt, false);
 		exit(g_code);
 	}
@@ -104,7 +104,7 @@ int	single_cmd(t_prompt *prompt, t_simple_cmds *cmds)
 	if (cmd && (!ft_strncmp(cmd, "exit", 5) || !ft_strncmp(cmd, "cd", 3)
 			|| !ft_strncmp(cmd, "export", 7) || !ft_strncmp(cmd, "unset", 6)))
 	{
-		g_code += builtin(prompt, prompt->simple_cmds);
+		g_code = builtin(prompt, prompt->simple_cmds);
 		return (0);
 	}
 	send_heredoc(prompt, prompt->simple_cmds);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:05:56 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/19 11:12:23 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:11:56 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	ms_unset(t_prompt *prompt, t_simple_cmds *cmds)
 	i = -1;
 	if (!cmds->str[0])
 	{
-		ft_putendl_fd("unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	else

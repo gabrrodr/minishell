@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcarneir <mcarneir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabrrodr <gabrrodr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 13:04:22 by gabrrodr          #+#    #+#             */
-/*   Updated: 2024/01/19 12:40:47 by mcarneir         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:36:30 by gabrrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int				is_redirection(t_tokens tokenType);
 int				is_builtin(char *str);
 int				nbr_nodes(t_lexer *lexer);
 void			alloc_double_array(int size, t_simple_cmds *cmds);
+t_lexer			*move_to_next_node(t_lexer *tmp);
 
 //utils
 char			*array_to_str(char **arr);
@@ -134,6 +135,8 @@ bool			doll_between_quotes(char *str);
 //void	replace_variables(t_prompt *prompt);
 char			*expand_input(t_prompt *prompt, char *input);
 void			reset_prompt(t_prompt *prompt, char **argv, char **env);
+char			*spicy_expand(t_prompt *prompt, char *input);
+void			expand_word(t_prompt *prompt, char **word);
 
 //builtins
 void			ms_echo(t_simple_cmds *process, t_prompt *prompt);
